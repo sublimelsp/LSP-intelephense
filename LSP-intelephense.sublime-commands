@@ -1,0 +1,3 @@
+[
+  { "caption": "LSP: Setup Intelephense server", "command": "lsp_intelephense_setup" }
+]
