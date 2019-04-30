@@ -7,3 +7,5 @@ PHP support for Sublime's LSP plugin.
 3. Restart Sublime.
 
 Server related issues report [here](https://github.com/bmewburn/intelephense-docs).
+
+> Note: On Mac, if you have problems running `LSP: Setup Intelephense server`, install [Fix Mac Path](https://packagecontrol.io/packages/Fix%20Mac%20Path), and optionally set the `additional_path_items` in your user preferences.
