@@ -1,36 +1,62 @@
 import shutil
 import os
 import sublime
+import threading
+import subprocess
 
 from LSP.plugin.core.handlers import LanguageHandler
 from LSP.plugin.core.settings import ClientConfig, LanguageConfig
 
-package_path = os.path.dirname(__file__)
-server_path = os.path.join(package_path, 'node_modules', 'intelephense', 'lib', 'intelephense.js')
-
 
 def plugin_loaded():
+    package_path = os.path.join(sublime.packages_path(), 'LSP-intelephense')
+    server_path = os.path.join(package_path, 'node_modules', 'intelephense', 'lib', 'intelephense.js')
     print('LSP-intelephense: Server {} installed.'.format('is' if os.path.isfile(server_path) else 'is not' ))
 
+    # install the node_modules if not installed
     if not os.path.isdir(os.path.join(package_path, 'node_modules')):
-        # install server if no node_modules
-        print('LSP-intelephense: Installing server.')
-        sublime.active_window().run_command(
-            "exec", {
-                "cmd": [
-                    "npm",
-                    "install",
-                    "--verbose",
-                    "--prefix",
-                    package_path
-                ]
-            }
+        # this will be called only when the plugin gets:
+        # - installed for the first time,
+        # - or when updated on package control
+        logAndShowMessage('LSP-intelephense: Installing server.')
+
+        runCommand(
+            onCommandDone,
+            ["npm", "install", "--verbose", "--prefix", package_path]
         )
-        sublime.message_dialog('LSP-intelephense\n\nRestart sublime after the server has been installed successfully.')
+
+
+def onCommandDone():
+    logAndShowMessage('LSP-intelephense: Server installed.')
+
+
+def runCommand(onExit, popenArgs):
+    """
+    Runs the given args in a subprocess.Popen, and then calls the function
+    onExit when the subprocess completes.
+    onExit is a callable object, and popenArgs is a list/tuple of args that
+    would give to subprocess.Popen.
+    """
+    def runInThread(onExit, popenArgs):
+        try:
+            subprocess.check_call(popenArgs)
+            onExit()
+        except subprocess.CalledProcessError as error:
+            logAndShowMessage('LSP-intelephense: Error while installing the server.', error)
+        return
+    thread = threading.Thread(target=runInThread, args=(onExit, popenArgs))
+    thread.start()
+    # returns immediately after the thread starts
+    return thread
 
 
 def is_node_installed():
     return shutil.which('node') is not None
+
+
+def logAndShowMessage(msg, additional_logs=None):
+    print(msg, '\n', additional_logs) if additional_logs else print(msg)
+    sublime.active_window().status_message(msg)
 
 
 class LspIntelephensePlugin(LanguageHandler):
@@ -40,6 +66,8 @@ class LspIntelephensePlugin(LanguageHandler):
 
     @property
     def config(self) -> ClientConfig:
+        package_path = os.path.join(sublime.packages_path(), 'LSP-intelephense')
+        server_path = os.path.join(package_path, 'node_modules', 'intelephense', 'lib', 'intelephense.js')
         return ClientConfig(
             name='lsp-intelephense',
             binary_args=[
