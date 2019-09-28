@@ -38,10 +38,11 @@ def lsp_expand_variables(window, var):
 
 
 def plugin_loaded():
-    print('LSP-intelephense: Server {} installed.'.format('is' if os.path.isfile(server_path) else 'is not' ))
+    is_server_installed = os.path.isfile(server_path)
+    print('LSP-intelephense: Server {} installed.'.format('is' if is_server_installed else 'is not' ))
 
     # install the node_modules if not installed
-    if not os.path.isdir(os.path.join(package_path, 'node_modules')):
+    if not is_server_installed:
         # this will be called only when the plugin gets:
         # - installed for the first time,
         # - or when updated on package control
