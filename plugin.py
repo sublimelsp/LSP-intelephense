@@ -5,7 +5,7 @@ import threading
 import subprocess
 
 from LSP.plugin.core.handlers import LanguageHandler
-from LSP.plugin.core.settings import ClientConfig, LanguageConfig
+from LSP.plugin.core.settings import ClientConfig, LanguageConfig, read_client_config
 
 
 package_path = os.path.dirname(__file__)
@@ -71,26 +71,17 @@ class LspIntelephensePlugin(LanguageHandler):
 
     @property
     def config(self) -> ClientConfig:
-        return ClientConfig(
-            name='lsp-intelephense',
-            binary_args=[
+        settings = sublime.load_settings("LSP-intelephense.sublime-settings")
+        client_configuration = settings.get('client')
+        default_configuration = {
+            "command": [
                 'node',
                 server_path,
                 '--stdio'
-            ],
-            tcp_port=None,
-            enabled=True,
-            init_options=dict(),
-            settings=dict(),
-            env=dict(),
-            languages=[
-                LanguageConfig(
-                    'php',
-                    ['source.php'],
-                    ["Packages/PHP/PHP.sublime-syntax"]
-                )
             ]
-        )
+        }
+        default_configuration.update(client_configuration)
+        return read_client_config('lsp-intelephense', default_configuration)
 
     def on_start(self, window) -> bool:
         if not is_node_installed():

@@ -1,0 +1,16 @@
+{
+	"client" : {
+		"enabled": true,
+		"languages": [
+			{
+				"languageId": "php",
+				"scopes": ["source.php"],
+				"syntaxes": ["Packages/PHP/PHP.sublime-syntax"]
+			}
+		],
+		"initializationOptions": {
+			"storagePath": null
+		},
+		"settings": {}
+	}
+}
