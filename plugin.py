@@ -107,7 +107,6 @@ class LspIntelephensePlugin(LanguageHandler):
         }
         default_configuration.update(client_configuration)
         default_configuration['initializationOptions'] = lsp_expand_variables(sublime.active_window(), client_configuration['initializationOptions'])
-        print('eeeeeeeej', default_configuration)
         return read_client_config('lsp-intelephense', default_configuration)
 
     def on_start(self, window) -> bool:
