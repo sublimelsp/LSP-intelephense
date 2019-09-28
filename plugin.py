@@ -1,6 +1,7 @@
 import shutil
 import os
 import sublime
+import tempfile
 import threading
 import subprocess
 
@@ -10,6 +11,30 @@ from LSP.plugin.core.settings import ClientConfig, LanguageConfig, read_client_c
 
 package_path = os.path.dirname(__file__)
 server_path = os.path.join(package_path, 'node_modules', 'intelephense', 'lib', 'intelephense.js')
+
+
+def get_expanding_variables(window):
+    variables = window.extract_variables()
+    variables.update({
+        "home": os.path.expanduser('~'),
+        "temp_dir": tempfile.gettempdir(),
+    })
+    return variables
+
+
+def lsp_expand_variables(window, var):
+    if isinstance(var, dict):
+        for key, value in var.items():
+            if isinstance(value, (dict, list, str)):
+                var[key] = lsp_expand_variables(window, value)
+    elif isinstance(var, list):
+        for idx, value in enumerate(var):
+            if isinstance(value, (dict, list, str)):
+                var[idx] = lsp_expand_variables(window, value)
+    elif isinstance(var, str):
+        var = sublime.expand_variables(var, get_expanding_variables(window))
+
+    return var
 
 
 def plugin_loaded():
@@ -81,6 +106,8 @@ class LspIntelephensePlugin(LanguageHandler):
             ]
         }
         default_configuration.update(client_configuration)
+        default_configuration['initializationOptions'] = lsp_expand_variables(sublime.active_window(), client_configuration['initializationOptions'])
+        print('eeeeeeeej', default_configuration)
         return read_client_config('lsp-intelephense', default_configuration)
 
     def on_start(self, window) -> bool:
