@@ -104,6 +104,13 @@ class LspIntelephensePlugin(LanguageHandler):
                 'node',
                 server_path,
                 '--stdio'
+            ],
+            "languages": [
+                {
+                    "languageId": "php",
+                    "scopes": ["source.php"],
+                    "syntaxes": ["Packages/PHP/PHP.sublime-syntax"]
+                }
             ]
         }
         default_configuration.update(client_configuration)
