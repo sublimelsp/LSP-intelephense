@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/sublimelsp/LSP-intelephense#readme",
   "dependencies": {
-    "intelephense": "^1.2.3"
+    "intelephense": "^1.3.4"
   }
 }
