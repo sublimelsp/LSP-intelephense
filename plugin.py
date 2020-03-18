@@ -10,9 +10,8 @@ from lsp_utils import ServerNpmResource
 PACKAGE_NAME = "LSP-intelephense"
 SETTINGS_FILENAME = "LSP-intelephense.sublime-settings"
 SERVER_DIRECTORY = "intelephense"
-SERVER_BINARY_PATH = os.path.join(
-    SERVER_DIRECTORY, "node_modules", "intelephense", "lib", "intelephense.js"
-)
+SERVER_BINARY_PATH = os.path.join(SERVER_DIRECTORY, "node_modules",
+                                  "intelephense", "lib", "intelephense.js")
 
 server = ServerNpmResource(PACKAGE_NAME, SERVER_DIRECTORY, SERVER_BINARY_PATH)
 
@@ -75,8 +74,8 @@ class LspIntelephensePlugin(LanguageHandler):
 
         default_configuration.update(configuration)
         default_configuration["initializationOptions"] = lsp_expand_variables(
-            sublime.active_window(), default_configuration.get("initializationOptions", {})
-        )
+            sublime.active_window(),
+            default_configuration.get("initializationOptions", {}))
 
         return read_client_config("lsp-intelephense", default_configuration)
 
@@ -101,7 +100,8 @@ class LspIntelephensePlugin(LanguageHandler):
 
     def on_start(self, window) -> bool:
         if not is_node_installed():
-            sublime.status_message("Please install Node.js for the PHP Language Server to work.")
+            sublime.status_message(
+                "Please install Node.js for the PHP Language Server to work.")
             return False
         return True
 
