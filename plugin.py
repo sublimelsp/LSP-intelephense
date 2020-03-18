@@ -2,23 +2,36 @@ import shutil
 import os
 import sublime
 import tempfile
-import threading
-import subprocess
 
 from LSP.plugin.core.handlers import LanguageHandler
-from LSP.plugin.core.settings import ClientConfig, LanguageConfig, read_client_config
+from LSP.plugin.core.settings import ClientConfig, read_client_config
+from lsp_utils import ServerNpmResource
+
+PACKAGE_NAME = "LSP-intelephense"
+SETTINGS_FILENAME = "LSP-intelephense.sublime-settings"
+SERVER_DIRECTORY = "intelephense"
+SERVER_BINARY_PATH = os.path.join(
+    SERVER_DIRECTORY, "node_modules", "intelephense", "lib", "intelephense.js"
+)
+
+server = ServerNpmResource(PACKAGE_NAME, SERVER_DIRECTORY, SERVER_BINARY_PATH)
 
 
-package_path = os.path.dirname(__file__)
-server_path = os.path.join(package_path, 'node_modules', 'intelephense', 'lib', 'intelephense.js')
+def plugin_loaded():
+    server.setup()
+
+
+def plugin_unloaded():
+    server.cleanup()
 
 
 def get_expanding_variables(window):
     variables = window.extract_variables()
     variables.update({
-        "home": os.path.expanduser('~'),
+        "home": os.path.expanduser("~"),
         "temp_dir": tempfile.gettempdir(),
     })
+
     return variables
 
 
@@ -37,91 +50,60 @@ def lsp_expand_variables(window, var):
     return var
 
 
-def plugin_loaded():
-    is_server_installed = os.path.isfile(server_path)
-    print('LSP-intelephense: Server {} installed.'.format('is' if is_server_installed else 'is not' ))
-
-    # install the node_modules if not installed
-    if not is_server_installed:
-        # this will be called only when the plugin gets:
-        # - installed for the first time,
-        # - or when updated on package control
-        logAndShowMessage('LSP-intelephense: Installing server.')
-
-        runCommand(
-            onCommandDone,
-            ["npm", "install", "--verbose", "--prefix", package_path, package_path]
-        )
-
-
-def onCommandDone():
-    logAndShowMessage('LSP-intelephense: Server installed.')
-
-
-def runCommand(onExit, popenArgs):
-    """
-    Runs the given args in a subprocess.Popen, and then calls the function
-    onExit when the subprocess completes.
-    onExit is a callable object, and popenArgs is a list/tuple of args that
-    would give to subprocess.Popen.
-    """
-    def runInThread(onExit, popenArgs):
-        try:
-            if sublime.platform() == 'windows':
-                subprocess.check_call(popenArgs, shell=True)
-            else:
-                subprocess.check_call(popenArgs)
-            onExit()
-        except subprocess.CalledProcessError as error:
-            logAndShowMessage('LSP-intelephense: Error while installing the server.', error)
-        return
-    thread = threading.Thread(target=runInThread, args=(onExit, popenArgs))
-    thread.start()
-    # returns immediately after the thread starts
-    return thread
-
-
 def is_node_installed():
-    return shutil.which('node') is not None
-
-
-def logAndShowMessage(msg, additional_logs=None):
-    print(msg, '\n', additional_logs) if additional_logs else print(msg)
-    sublime.active_window().status_message(msg)
+    return shutil.which("node") is not None
 
 
 class LspIntelephensePlugin(LanguageHandler):
     @property
     def name(self) -> str:
-        return 'lsp-intelephense'
+        return PACKAGE_NAME.lower()
 
     @property
     def config(self) -> ClientConfig:
-        settings = sublime.load_settings("LSP-intelephense.sublime-settings")
-        client_configuration = settings.get('client')
+        # Calling setup() also here as this might run before `plugin_loaded`.
+        # Will be a no-op if already ran.
+        # See https://github.com/sublimelsp/LSP/issues/899
+        server.setup()
+
+        configuration = self.migrate_and_read_configuration()
+
         default_configuration = {
-            "command": [
-                'node',
-                server_path,
-                '--stdio'
-            ],
-            "languages": [
-                {
-                    "languageId": "php",
-                    "scopes": ["source.php"],
-                    "syntaxes": ["Packages/PHP/PHP.sublime-syntax"]
-                }
-            ]
+            "enabled": True,
+            "command": ["node", server.binary_path, "--stdio"],
         }
-        default_configuration.update(client_configuration)
-        default_configuration['initializationOptions'] = lsp_expand_variables(sublime.active_window(), client_configuration['initializationOptions'])
-        return read_client_config('lsp-intelephense', default_configuration)
+
+        default_configuration.update(configuration)
+        default_configuration["initializationOptions"] = lsp_expand_variables(
+            sublime.active_window(), default_configuration.get("initializationOptions", {})
+        )
+
+        return read_client_config("lsp-intelephense", default_configuration)
+
+    def migrate_and_read_configuration(self) -> dict:
+        settings = {}
+        loaded_settings = sublime.load_settings(SETTINGS_FILENAME)
+
+        if loaded_settings:
+            if loaded_settings.has("client"):
+                client = loaded_settings.get("client")
+                loaded_settings.erase("client")
+                # Migrate old keys
+                for key in client:
+                    loaded_settings.set(key, client[key])
+                sublime.save_settings(SETTINGS_FILENAME)
+
+            # Read configuration keys
+            for key in ["languages", "initializationOptions", "settings"]:
+                settings[key] = loaded_settings.get(key)
+
+        return settings
 
     def on_start(self, window) -> bool:
         if not is_node_installed():
-            sublime.status_message('Please install Node.js for the PHP Language Server to work.')
+            sublime.status_message("Please install Node.js for the PHP Language Server to work.")
             return False
         return True
 
     def on_initialized(self, client) -> None:
-        pass   # extra initialization here.
+        pass  # extra initialization here.

@@ -1,18 +1,24 @@
 {
-	"client" : {
-		"enabled": true,
-		"languages": [
-			{
-				"languageId": "php",
-				"scopes": ["source.php"],
-				"syntaxes": ["Packages/PHP/PHP.sublime-syntax"]
-			}
-		],
-		"initializationOptions": {
-			"storagePath": null
-			// "clearCache": false,
-			// "licenceKey": "${packages}/User/intelephense-license.txt"
+	"languages": [
+		{
+			"languageId": "php",
+			"scopes": ["source.php"],
+			"syntaxes": [
+				"Packages/PHP/PHP.sublime-syntax",
+			],
 		},
-		"settings": {}
-	}
+	],
+	"initializationOptions": {
+		"clearCache": false,
+		// "storagePath": "/tmp/intelephense",
+		// "globalStoragePath": "/tmp/intelephense",
+		// "licenceKey": "${packages}/User/intelephense-license.txt",
+	},
+	// @see configuration in https://github.com/bmewburn/vscode-intelephense/blob/master/package.json
+	"settings": {
+		// as an example
+		"debug": {
+			"enable": false,
+		},
+	},
 }
