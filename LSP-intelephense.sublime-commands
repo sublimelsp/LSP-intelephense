@@ -1,3 +1,10 @@
 [
-  { "caption": "LSP: Setup Intelephense server", "command": "lsp_intelephense_setup" }
+    {
+        "caption": "Preferences: LSP-intelephense Settings",
+        "command": "edit_settings",
+        "args": {
+            "base_file": "${packages}/LSP-intelephense/LSP-intelephense.sublime-settings",
+            "default": "// Settings in here override those in \"LSP-intelephense/LSP-intelephense.sublime-settings\",\n\n{\n\t$0\n}\n",
+        },
+    },
 ]
