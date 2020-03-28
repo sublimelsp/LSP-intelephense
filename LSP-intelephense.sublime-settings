@@ -1,13 +1,5 @@
 {
-	"languages": [
-		{
-			"languageId": "php",
-			"scopes": ["source.php"],
-			"syntaxes": [
-				"Packages/PHP/PHP.sublime-syntax",
-			],
-		},
-	],
+	"languages": [{"languageId": "php", "scopes": ["source.php", "embedding.php"]}],
 	"initializationOptions": {
 		"clearCache": false,
 		// "storagePath": "/tmp/intelephense",
