@@ -77,7 +77,7 @@ class LspIntelephensePlugin(LanguageHandler):
             sublime.active_window(),
             default_configuration.get("initializationOptions", {}))
 
-        return read_client_config("lsp-intelephense", default_configuration)
+        return read_client_config(self.name, default_configuration)
 
     def migrate_and_read_configuration(self) -> dict:
         settings = {}
