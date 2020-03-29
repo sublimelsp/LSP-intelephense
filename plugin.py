@@ -106,4 +106,10 @@ class LspIntelephensePlugin(LanguageHandler):
         return server.ready
 
     def on_initialized(self, client) -> None:
-        pass  # extra initialization here.
+        client.on_notification(
+            'indexingStarted', lambda params: self.handle_indexing_status('started'))
+        client.on_notification(
+            'indexingEnded', lambda params: self.handle_indexing_status('finished'))
+
+    def handle_indexing_status(self, status) -> None:
+        sublime.status_message('Intelephense: Indexing {}'.format(status))
