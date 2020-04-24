@@ -1,0 +1,6 @@
+version: 1
+update_configs:
+  - package_manager: "javascript"
+    directory: "/intelephense"
+    update_schedule: "daily"
+    target_branch: "master"
