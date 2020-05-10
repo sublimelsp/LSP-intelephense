@@ -44,7 +44,8 @@ class LspIntelephensePlugin(NpmClientHandler):
         server_directory, 'node_modules', 'intelephense', 'lib', 'intelephense.js'
     )
 
-    def on_client_configuration_ready(self, configuration: dict) -> None:
+    @classmethod
+    def on_client_configuration_ready(cls, configuration: dict) -> None:
         configuration["initializationOptions"] = lsp_expand_variables(
             sublime.active_window(),
             configuration.get("initializationOptions", {}))
