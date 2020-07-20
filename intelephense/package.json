@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
   "dependencies": {
-    "intelephense": "^1.5.2"
+    "intelephense": "^1.5.3"
   }
 }
