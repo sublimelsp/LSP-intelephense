@@ -39,7 +39,7 @@ def lsp_expand_variables(window, var):
 
 class LspIntelephensePlugin(NpmClientHandler):
     package_name = __package__
-    server_directory = 'intelephense'
+    server_directory = 'language-server'
     server_binary_path = os.path.join(
         server_directory, 'node_modules', 'intelephense', 'lib', 'intelephense.js'
     )
