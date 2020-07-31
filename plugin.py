@@ -14,27 +14,14 @@ def plugin_unloaded():
 
 def get_expanding_variables(window):
     variables = window.extract_variables()
-    variables.update({
-        'home': os.path.expanduser('~'),
-        'temp_dir': tempfile.gettempdir(),
-    })
-
+    variables["cache_path"] = sublime.cache_path()
+    variables["temp_dir"] = tempfile.gettempdir()
+    variables["home"] = os.path.expanduser('~')
     return variables
 
 
 def lsp_expand_variables(window, var):
-    if isinstance(var, dict):
-        for key, value in var.items():
-            if isinstance(value, (dict, list, str)):
-                var[key] = lsp_expand_variables(window, value)
-    elif isinstance(var, list):
-        for idx, value in enumerate(var):
-            if isinstance(value, (dict, list, str)):
-                var[idx] = lsp_expand_variables(window, value)
-    elif isinstance(var, str):
-        var = sublime.expand_variables(var, get_expanding_variables(window))
-
-    return var
+    return sublime.expand_variables(var, get_expanding_variables(window))
 
 
 class LspIntelephensePlugin(NpmClientHandler):
