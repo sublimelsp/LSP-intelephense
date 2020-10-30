@@ -1,6 +1,9 @@
 import os
 import sublime
 import tempfile
+
+from LSP.plugin.core.typing import Dict, Optional
+
 from lsp_utils import NpmClientHandler
 
 
@@ -12,28 +15,23 @@ def plugin_unloaded():
     LspIntelephensePlugin.cleanup()
 
 
-def get_expanding_variables(window):
-    variables = window.extract_variables()
-    variables["cache_path"] = sublime.cache_path()
-    variables["temp_dir"] = tempfile.gettempdir()
-    variables["home"] = os.path.expanduser('~')
-    return variables
-
-
-def lsp_expand_variables(window, var):
-    return sublime.expand_variables(var, get_expanding_variables(window))
-
-
 class LspIntelephensePlugin(NpmClientHandler):
     package_name = __package__.partition(".")[0]
     server_directory = "language-server"
     server_binary_path = os.path.join(server_directory, "node_modules", "intelephense", "lib", "intelephense.js")
 
     @classmethod
-    def on_client_configuration_ready(cls, configuration: dict) -> None:
-        configuration["initializationOptions"] = lsp_expand_variables(
-            sublime.active_window(),
-            configuration.get("initializationOptions", {}))
+    def additional_variables(cls) -> Optional[Dict[str, str]]:
+        variables = super().additional_variables() or {}
+        variables.update(
+            {
+                "cache_path": sublime.cache_path(),
+                "home": os.path.expanduser("~"),
+                "temp_dir": tempfile.gettempdir(),
+            }
+        )
+
+        return variables
 
     def on_ready(self, api) -> None:
         api.on_notification("indexingStarted", lambda params: self._handle_indexing_status("started"))
