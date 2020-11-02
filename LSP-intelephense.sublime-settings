@@ -20,11 +20,7 @@
 	},
 	// @see configuration in https://github.com/bmewburn/vscode-intelephense/blob/master/package.json
 	"settings": {
-		"intelephense": {
-			// as an example
-			"trace": {
-				"server": "off",
-			},
-		},
+		// as an example
+		"intelephense.trace.server": "off",
 	},
 }
