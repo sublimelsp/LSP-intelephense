@@ -16,6 +16,9 @@
 		"clearCache": false,
 		// "storagePath": "/tmp/intelephense",
 		// "globalStoragePath": "/tmp/intelephense",
+
+		// if you want to use a premium license, you can either paste the key directly
+		// or paste it into a file and provide its absolute path here
 		// "licenceKey": "${packages}/User/intelephense-license.txt",
 	},
 	// @see configuration in https://github.com/bmewburn/vscode-intelephense/blob/master/package.json
