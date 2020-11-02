@@ -27,6 +27,7 @@ class LspIntelephensePlugin(NpmClientHandler):
             {
                 "cache_path": sublime.cache_path(),
                 "home": os.path.expanduser("~"),
+                "package_storage": cls.package_storage(),
                 "temp_dir": tempfile.gettempdir(),
             }
         )
