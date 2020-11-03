@@ -34,6 +34,10 @@ class LspIntelephensePlugin(NpmClientHandler):
 
         return variables
 
+    @classmethod
+    def install_in_cache(cls) -> bool:
+        return False
+
     def on_ready(self, api: ApiWrapperInterface) -> None:
         api.on_notification("indexingStarted", lambda params: self._handle_indexing_status("started"))
         api.on_notification("indexingEnded", lambda params: self._handle_indexing_status("finished"))
