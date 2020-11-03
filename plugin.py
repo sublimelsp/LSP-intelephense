@@ -38,6 +38,10 @@ class LspIntelephensePlugin(NpmClientHandler):
     def install_in_cache(cls) -> bool:
         return False
 
+    @classmethod
+    def minimum_node_version(cls) -> Tuple[int, int, int]:
+        return (10, 0, 0)
+
     def on_ready(self, api: ApiWrapperInterface) -> None:
         api.on_notification("indexingStarted", lambda params: self._handle_indexing_status("started"))
         api.on_notification("indexingEnded", lambda params: self._handle_indexing_status("finished"))
