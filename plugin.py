@@ -2,7 +2,7 @@ import os
 import sublime
 import tempfile
 
-from LSP.plugin.core.typing import Dict, Optional
+from LSP.plugin.core.typing import Dict, Optional, Tuple
 
 from lsp_utils import ApiWrapperInterface, NpmClientHandler
 
