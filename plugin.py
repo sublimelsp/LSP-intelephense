@@ -5,6 +5,7 @@ import tempfile
 from LSP.plugin.core.typing import Dict, Optional, Tuple
 
 from lsp_utils import ApiWrapperInterface, NpmClientHandler
+from sublime_lib import ActivityIndicator
 
 
 def plugin_loaded():
@@ -19,6 +20,11 @@ class LspIntelephensePlugin(NpmClientHandler):
     package_name = __package__.partition(".")[0]
     server_directory = "language-server"
     server_binary_path = os.path.join(server_directory, "node_modules", "intelephense", "lib", "intelephense.js")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self._activity_indicator = None  # type: Optional[ActivityIndicator]
 
     @classmethod
     def additional_variables(cls) -> Optional[Dict[str, str]]:
@@ -43,8 +49,26 @@ class LspIntelephensePlugin(NpmClientHandler):
         return (10, 0, 0)
 
     def on_ready(self, api: ApiWrapperInterface) -> None:
-        api.on_notification("indexingStarted", lambda params: self._handle_indexing_status("started"))
-        api.on_notification("indexingEnded", lambda params: self._handle_indexing_status("finished"))
+        api.on_notification("indexingStarted", self.handle_indexing_started)
+        api.on_notification("indexingEnded", self.handle_indexing_ended)
 
-    def _handle_indexing_status(self, status: str) -> None:
-        sublime.status_message("Intelephense: Indexing {}".format(status))
+    def handle_indexing_started(self, params) -> None:
+        self._start_indicator("{}: Indexing...".format(self.package_name))
+
+    def handle_indexing_ended(self, params) -> None:
+        self._stop_indicator()
+
+    def _start_indicator(self, msg: str = "") -> None:
+        if self._activity_indicator:
+            self._activity_indicator.label = msg  # type: ignore
+            self._activity_indicator.update()
+        else:
+            view = sublime.active_window().active_view()
+            if view:
+                self._activity_indicator = ActivityIndicator(view, msg)  # type: ignore
+                self._activity_indicator.start()
+
+    def _stop_indicator(self) -> None:
+        if self._activity_indicator:
+            self._activity_indicator.stop()
+            self._activity_indicator = None
