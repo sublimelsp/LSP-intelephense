@@ -1,0 +1,680 @@
+{
+  "contributions": {
+    "settings": [
+      {
+        "file_patterns": [
+          "/LSP-intelephense.sublime-settings"
+        ],
+        "schema": {
+          "$id": "sublime://settings/LSP-intelephense",
+          "definitions": {
+            "PluginConfig": {
+              "properties": {
+                "initializationOptions": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "clearCache": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "Clear server state on startup."
+                    },
+                    "globalStoragePath": {
+                      "type": "string",
+                      "default": "${home}/.intelephense",
+                      "markdownDescription": "Absolute path to global dir. Defaults to `os.homedir()`."
+                    },
+                    "licenceKey": {
+                      "type": "string",
+                      "default": "",
+                      "description": "Licence key or absolute path to a text file containing the licence key."
+                    },
+                    "storagePath": {
+                      "type": "string",
+                      "default": "${temp_dir}/intelephense",
+                      "markdownDescription": "Absolute path to storage dir. Defaults to `os.tmpdir()`."
+                    }
+                  }
+                },
+                "settings": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "intelephense.compatibility.correctForBaseClassStaticUnionTypes": {
+                      "type": "boolean",
+                      "default": true,
+                      "markdownDescription": "Resolves `BaseClass|static` union types to `static` instead of `BaseClass`."
+                    },
+                    "intelephense.compatibility.correctForArrayAccessArrayAndTraversableArrayUnionTypes": {
+                      "type": "boolean",
+                      "default": true,
+                      "markdownDescription": "Resolves `ArrayAccess` and `Traversable` implementations that are unioned with a typed array to generic syntax. eg `ArrayAccessOrTraversable|ElementType[]` => `ArrayAccessOrTraversable<mixed, ElementType>`."
+                    },
+                    "intelephense.files.maxSize": {
+                      "type": "number",
+                      "default": 1000000,
+                      "description": "Maximum file size in bytes."
+                    },
+                    "intelephense.files.associations": {
+                      "type": "array",
+                      "default": [
+                        "*.php",
+                        "*.phtml"
+                      ],
+                      "description": "Configure glob patterns to make files available for language server features. Inherits from files.associations."
+                    },
+                    "intelephense.files.exclude": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "default": [
+                        "**/.git/**",
+                        "**/.svn/**",
+                        "**/.hg/**",
+                        "**/CVS/**",
+                        "**/.DS_Store/**",
+                        "**/node_modules/**",
+                        "**/bower_components/**",
+                        "**/vendor/**/{Tests,tests}/**",
+                        "**/.history/**",
+                        "**/vendor/**/vendor/**"
+                      ],
+                      "description": "Configure glob patterns to exclude certain files and folders from all language server features. Inherits from files.exclude."
+                    },
+                    "intelephense.stubs": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "amqp",
+                          "apache",
+                          "apcu",
+                          "bcmath",
+                          "blackfire",
+                          "bz2",
+                          "calendar",
+                          "cassandra",
+                          "com_dotnet",
+                          "Core",
+                          "couchbase",
+                          "crypto",
+                          "ctype",
+                          "cubrid",
+                          "curl",
+                          "date",
+                          "dba",
+                          "decimal",
+                          "dom",
+                          "ds",
+                          "enchant",
+                          "Ev",
+                          "event",
+                          "exif",
+                          "fann",
+                          "FFI",
+                          "ffmpeg",
+                          "fileinfo",
+                          "filter",
+                          "fpm",
+                          "ftp",
+                          "gd",
+                          "gearman",
+                          "geoip",
+                          "geos",
+                          "gettext",
+                          "gmagick",
+                          "gmp",
+                          "gnupg",
+                          "grpc",
+                          "hash",
+                          "http",
+                          "ibm_db2",
+                          "iconv",
+                          "igbinary",
+                          "imagick",
+                          "imap",
+                          "inotify",
+                          "interbase",
+                          "intl",
+                          "json",
+                          "judy",
+                          "ldap",
+                          "leveldb",
+                          "libevent",
+                          "libsodium",
+                          "libxml",
+                          "lua",
+                          "lzf",
+                          "mailparse",
+                          "mapscript",
+                          "mbstring",
+                          "mcrypt",
+                          "memcache",
+                          "memcached",
+                          "meminfo",
+                          "meta",
+                          "ming",
+                          "mongo",
+                          "mongodb",
+                          "mosquitto-php",
+                          "mqseries",
+                          "msgpack",
+                          "mssql",
+                          "mysql",
+                          "mysql_xdevapi",
+                          "mysqli",
+                          "ncurses",
+                          "newrelic",
+                          "oauth",
+                          "oci8",
+                          "odbc",
+                          "openssl",
+                          "parallel",
+                          "Parle",
+                          "pcntl",
+                          "pcov",
+                          "pcre",
+                          "pdflib",
+                          "PDO",
+                          "pdo_ibm",
+                          "pdo_mysql",
+                          "pdo_pgsql",
+                          "pdo_sqlite",
+                          "pgsql",
+                          "Phar",
+                          "phpdbg",
+                          "posix",
+                          "pspell",
+                          "pthreads",
+                          "radius",
+                          "rar",
+                          "rdkafka",
+                          "readline",
+                          "recode",
+                          "redis",
+                          "Reflection",
+                          "regex",
+                          "rpminfo",
+                          "rrd",
+                          "SaxonC",
+                          "session",
+                          "shmop",
+                          "SimpleXML",
+                          "snmp",
+                          "soap",
+                          "sockets",
+                          "sodium",
+                          "solr",
+                          "SPL",
+                          "SplType",
+                          "SQLite",
+                          "sqlite3",
+                          "sqlsrv",
+                          "ssh2",
+                          "standard",
+                          "stats",
+                          "stomp",
+                          "suhosin",
+                          "superglobals",
+                          "svn",
+                          "sybase",
+                          "sync",
+                          "sysvmsg",
+                          "sysvsem",
+                          "sysvshm",
+                          "tidy",
+                          "tokenizer",
+                          "uopz",
+                          "uuid",
+                          "uv",
+                          "v8js",
+                          "wddx",
+                          "win32service",
+                          "winbinder",
+                          "wincache",
+                          "wordpress",
+                          "xcache",
+                          "xdebug",
+                          "xhprof",
+                          "xml",
+                          "xmlreader",
+                          "xmlrpc",
+                          "xmlwriter",
+                          "xsl",
+                          "xxtea",
+                          "yaf",
+                          "yaml",
+                          "yar",
+                          "zend",
+                          "Zend OPcache",
+                          "ZendCache",
+                          "ZendDebugger",
+                          "ZendUtils",
+                          "zip",
+                          "zlib",
+                          "zmq",
+                          "zookeeper"
+                        ]
+                      },
+                      "default": [
+                        "apache",
+                        "bcmath",
+                        "bz2",
+                        "calendar",
+                        "com_dotnet",
+                        "Core",
+                        "ctype",
+                        "curl",
+                        "date",
+                        "dba",
+                        "dom",
+                        "enchant",
+                        "exif",
+                        "FFI",
+                        "fileinfo",
+                        "filter",
+                        "fpm",
+                        "ftp",
+                        "gd",
+                        "gettext",
+                        "gmp",
+                        "hash",
+                        "iconv",
+                        "imap",
+                        "intl",
+                        "json",
+                        "ldap",
+                        "libxml",
+                        "mbstring",
+                        "meta",
+                        "mysqli",
+                        "oci8",
+                        "odbc",
+                        "openssl",
+                        "pcntl",
+                        "pcre",
+                        "PDO",
+                        "pdo_ibm",
+                        "pdo_mysql",
+                        "pdo_pgsql",
+                        "pdo_sqlite",
+                        "pgsql",
+                        "Phar",
+                        "posix",
+                        "pspell",
+                        "readline",
+                        "Reflection",
+                        "session",
+                        "shmop",
+                        "SimpleXML",
+                        "snmp",
+                        "soap",
+                        "sockets",
+                        "sodium",
+                        "SPL",
+                        "sqlite3",
+                        "standard",
+                        "superglobals",
+                        "sysvmsg",
+                        "sysvsem",
+                        "sysvshm",
+                        "tidy",
+                        "tokenizer",
+                        "xml",
+                        "xmlreader",
+                        "xmlrpc",
+                        "xmlwriter",
+                        "xsl",
+                        "Zend OPcache",
+                        "zip",
+                        "zlib"
+                      ],
+                      "description": "Configure stub files for built in symbols and common extensions. The default setting includes PHP core and all bundled extensions."
+                    },
+                    "intelephense.completion.insertUseDeclaration": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Use declarations will be automatically inserted for namespaced classes, traits, interfaces, functions, and constants."
+                    },
+                    "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "Global namespace constants and functions will be fully qualified (prefixed with a backslash)."
+                    },
+                    "intelephense.completion.triggerParameterHints": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Method and function completions will include parentheses and trigger parameter hints."
+                    },
+                    "intelephense.completion.maxItems": {
+                      "type": "number",
+                      "default": 100,
+                      "description": "The maximum number of completion items returned per request."
+                    },
+                    "intelephense.format.enable": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables formatting."
+                    },
+                    "intelephense.format.braces": {
+                      "type": "string",
+                      "default": "psr12",
+                      "enum": [
+                        "psr12",
+                        "allman",
+                        "k&r"
+                      ],
+                      "enumDescriptions": [
+                        "PHP-FIG PSR-2 and PSR-12 style. A mix of Allman and K&R",
+                        "Allman. Opening brace on the next line.",
+                        "K&R (1TBS). Opening brace on the same line."
+                      ],
+                      "description": "Controls formatting style of braces"
+                    },
+                    "intelephense.environment.documentRoot": {
+                      "type": "string",
+                      "description": "The directory of the entry point to the application (directory of index.php). Can be absolute or relative to the workspace folder. Used for resolving script inclusion."
+                    },
+                    "intelephense.environment.includePaths": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "The include paths (as individual absolute path items) as defined in the include_path ini setting or paths to external libraries. Used for resolving script inclusion and/or adding external symbols to folder."
+                    },
+                    "intelephense.environment.phpVersion": {
+                      "type": "string",
+                      "default": "7.4.0",
+                      "description": "A semver compatible string that represents the target PHP version. Used for providing version appropriate suggestions and diagnostics. PHP 5.3.0 and greater supported."
+                    },
+                    "intelephense.environment.shortOpenTag": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "When enabled '<?' will be parsed as a PHP open tag. Defaults to false."
+                    },
+                    "intelephense.diagnostics.enable": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables diagnostics."
+                    },
+                    "intelephense.diagnostics.run": {
+                      "type": "string",
+                      "default": "onType",
+                      "enum": [
+                        "onType",
+                        "onSave"
+                      ],
+                      "enumDescriptions": [
+                        "Diagnostics will run as changes are made to the document.",
+                        "Diagnostics will run when the document is saved."
+                      ],
+                      "description": "Controls when diagnostics are run."
+                    },
+                    "intelephense.diagnostics.embeddedLanguages": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables diagnostics in embedded languages."
+                    },
+                    "intelephense.diagnostics.undefinedSymbols": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "DEPRECATED. Use the setting for each symbol category."
+                    },
+                    "intelephense.diagnostics.undefinedVariables": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables undefined variable diagnostics."
+                    },
+                    "intelephense.diagnostics.undefinedTypes": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables undefined class, interface and trait diagnostics."
+                    },
+                    "intelephense.diagnostics.undefinedFunctions": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables undefined function diagnostics."
+                    },
+                    "intelephense.diagnostics.undefinedConstants": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables undefined constant diagnostics."
+                    },
+                    "intelephense.diagnostics.undefinedClassConstants": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables undefined class constant diagnostics."
+                    },
+                    "intelephense.diagnostics.undefinedMethods": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables undefined method diagnostics."
+                    },
+                    "intelephense.diagnostics.undefinedProperties": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables undefined static property diagnostics."
+                    },
+                    "intelephense.diagnostics.unusedSymbols": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables unused variable, private member, and import diagnostics."
+                    },
+                    "intelephense.diagnostics.unexpectedTokens": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables unexpected token diagnostics."
+                    },
+                    "intelephense.diagnostics.duplicateSymbols": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables duplicate symbol diagnostics."
+                    },
+                    "intelephense.diagnostics.argumentCount": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables argument count diagnostics."
+                    },
+                    "intelephense.diagnostics.typeErrors": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables diagnostics on type compatibility of arguments, property assignments, and return statements where types have been declared."
+                    },
+                    "intelephense.diagnostics.deprecated": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables deprecated diagnostics."
+                    },
+                    "intelephense.diagnostics.languageConstraints": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables reporting of various language constraint errors."
+                    },
+                    "intelephense.diagnostics.implementationErrors": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "Enables reporting of problems associated with method and class implementations. For example, unimplemented methods or method signature incompatibilities."
+                    },
+                    "intelephense.runtime": {
+                      "type": "string",
+                      "description": "Path to a Node.js executable."
+                    },
+                    "intelephense.maxMemory": {
+                      "type": "number",
+                      "description": "Maximum memory (in MB) that the server should use. On some systems this may only have effect when runtime has been set. Minimum 256."
+                    },
+                    "intelephense.licenceKey": {
+                      "type": "string",
+                      "markdownDescription": "Deprecated. Use the `licenceKey` in `initializationOptions` instead."
+                    },
+                    "intelephense.telemetry.enabled": {
+                      "type": [
+                        "boolean",
+                        "null"
+                      ],
+                      "description": "Anonymous usage and crash data will be sent to Azure Application Insights. Inherits from telemetry.enableTelemetry.",
+                      "default": null
+                    },
+                    "intelephense.rename.exclude": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "default": [
+                        "**/vendor/**"
+                      ],
+                      "description": "Glob patterns matching files and folders that should be excluded when renaming symbols. Rename operation will fail if the symbol definition is found in the excluded files/folders."
+                    },
+                    "intelephense.references.exclude": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "default": [
+                        "**/vendor/**"
+                      ],
+                      "description": "Glob patterns matching files and folders that should be excluded from references search."
+                    },
+                    "intelephense.phpdoc.returnVoid": {
+                      "type": "boolean",
+                      "default": true,
+                      "markdownDescription": "Adds `@return void` to auto generated phpdoc for definitions that do not return a value."
+                    },
+                    "intelephense.phpdoc.textFormat": {
+                      "type": "string",
+                      "enum": [
+                        "snippet",
+                        "text"
+                      ],
+                      "default": "snippet",
+                      "enumDescriptions": [
+                        "Auto generated phpdoc is returned in snippet format. Templates are partially resolved by evaluating phpdoc specific variables only.",
+                        "Auto generated phpdoc is returned as plain text. Templates are resolved completely by the server."
+                      ]
+                    },
+                    "intelephense.phpdoc.classTemplate": {
+                      "type": "object",
+                      "properties": {
+                        "summary": {
+                          "type": "string",
+                          "description": "A snippet string representing a phpdoc summary."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "A snippet string representing a phpdoc description."
+                        },
+                        "tags": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "An array of snippet strings representing phpdoc tags."
+                        }
+                      },
+                      "default": {
+                        "summary": "$1",
+                        "tags": [
+                          "@package ${1:$SYMBOL_NAMESPACE}"
+                        ]
+                      },
+                      "description": "An object that describes the format of generated class/interface/trait phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE."
+                    },
+                    "intelephense.phpdoc.propertyTemplate": {
+                      "type": "object",
+                      "properties": {
+                        "summary": {
+                          "type": "string",
+                          "description": "A snippet string representing a phpdoc summary."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "A snippet string representing a phpdoc description."
+                        },
+                        "tags": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "An array of snippet strings representing phpdoc tags."
+                        }
+                      },
+                      "default": {
+                        "summary": "$1",
+                        "tags": [
+                          "@var ${1:$SYMBOL_TYPE}"
+                        ]
+                      },
+                      "description": "An object that describes the format of generated property phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE."
+                    },
+                    "intelephense.phpdoc.functionTemplate": {
+                      "type": "object",
+                      "properties": {
+                        "summary": {
+                          "type": "string",
+                          "description": "A snippet string representing a phpdoc summary."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "A snippet string representing a phpdoc description."
+                        },
+                        "tags": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "An array of snippet strings representing phpdoc tags."
+                        }
+                      },
+                      "default": {
+                        "summary": "$1",
+                        "tags": [
+                          "@param ${1:$SYMBOL_TYPE} $SYMBOL_NAME $2",
+                          "@return ${1:$SYMBOL_TYPE} $2",
+                          "@throws ${1:$SYMBOL_TYPE} $2"
+                        ]
+                      },
+                      "description": "An object that describes the format of generated function/method phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE."
+                    },
+                    "intelephense.phpdoc.useFullyQualifiedNames": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "Fully qualified names will be used for types when true. When false short type names will be used and imported where appropriate. Overrides intelephense.completion.insertUseDeclaration."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "sublime://settings/LSP-plugin-base"
+            },
+            {
+              "$ref": "sublime://settings/LSP-intelephense#/definitions/PluginConfig"
+            }
+          ]
+        }
+      },
+      {
+        "file_patterns": [
+          "/*.sublime-project"
+        ],
+        "schema": {
+          "properties": {
+            "settings": {
+              "properties": {
+                "LSP": {
+                  "properties": {
+                    "LSP-intelephense": {
+                      "$ref": "sublime://settings/LSP-intelephense#/definitions/PluginConfig"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

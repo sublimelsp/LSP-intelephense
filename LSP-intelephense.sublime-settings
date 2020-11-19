@@ -15,7 +15,7 @@
 	"initializationOptions": {
 		"clearCache": false,
 		// "storagePath": "${temp_dir}/intelephense",
-		// "globalStoragePath": "${temp_dir}/intelephense",
+		// "globalStoragePath": "${home}/.intelephense",
 
 		// if you want to use a premium license, you can either paste the key directly
 		// or paste it into a file and provide its absolute path here
@@ -23,7 +23,7 @@
 	},
 	// @see configuration in https://github.com/bmewburn/vscode-intelephense/blob/master/package.json
 	"settings": {
-		// as an example
-		"intelephense.trace.server": "off",
+		// There are quite a lot of settings for intelephense...
+		// For a full list, you can check the link above or just use LSP-json for autocompletion.
 	},
 }
