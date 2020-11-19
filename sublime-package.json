@@ -21,7 +21,7 @@
                     "globalStoragePath": {
                       "type": "string",
                       "default": "${home}/.intelephense",
-                      "description": "Absolute path to global dir. Defaults to `os.homedir()`."
+                      "markdownDescription": "Absolute path to global dir. Defaults to `os.homedir()`."
                     },
                     "licenceKey": {
                       "type": "string",
@@ -31,8 +31,8 @@
                     "storagePath": {
                       "type": "string",
                       "default": "${temp_dir}/intelephense",
-                      "description": "Absolute path to storage dir. Defaults to `os.tmpdir()`."
-                    },
+                      "markdownDescription": "Absolute path to storage dir. Defaults to `os.tmpdir()`."
+                    }
                   }
                 },
                 "settings": {
@@ -41,20 +41,17 @@
                     "intelephense.compatibility.correctForBaseClassStaticUnionTypes": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Resolves `BaseClass|static` union types to `static` instead of `BaseClass`.",
-                      "scope": "window"
+                      "markdownDescription": "Resolves `BaseClass|static` union types to `static` instead of `BaseClass`."
                     },
                     "intelephense.compatibility.correctForArrayAccessArrayAndTraversableArrayUnionTypes": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Resolves `ArrayAccess` and `Traversable` implementations that are unioned with a typed array to generic syntax. eg `ArrayAccessOrTraversable|ElementType[]` => `ArrayAccessOrTraversable<mixed, ElementType>`.",
-                      "scope": "window"
+                      "markdownDescription": "Resolves `ArrayAccess` and `Traversable` implementations that are unioned with a typed array to generic syntax. eg `ArrayAccessOrTraversable|ElementType[]` => `ArrayAccessOrTraversable<mixed, ElementType>`."
                     },
                     "intelephense.files.maxSize": {
                       "type": "number",
                       "default": 1000000,
-                      "description": "Maximum file size in bytes.",
-                      "scope": "window"
+                      "description": "Maximum file size in bytes."
                     },
                     "intelephense.files.associations": {
                       "type": "array",
@@ -62,8 +59,7 @@
                         "*.php",
                         "*.phtml"
                       ],
-                      "description": "Configure glob patterns to make files available for language server features. Inherits from files.associations.",
-                      "scope": "window"
+                      "description": "Configure glob patterns to make files available for language server features. Inherits from files.associations."
                     },
                     "intelephense.files.exclude": {
                       "type": "array",
@@ -82,8 +78,7 @@
                         "**/.history/**",
                         "**/vendor/**/vendor/**"
                       ],
-                      "description": "Configure glob patterns to exclude certain files and folders from all language server features. Inherits from files.exclude.",
-                      "scope": "resource"
+                      "description": "Configure glob patterns to exclude certain files and folders from all language server features. Inherits from files.exclude."
                     },
                     "intelephense.stubs": {
                       "type": "array",
@@ -333,38 +328,32 @@
                         "zip",
                         "zlib"
                       ],
-                      "description": "Configure stub files for built in symbols and common extensions. The default setting includes PHP core and all bundled extensions.",
-                      "scope": "window"
+                      "description": "Configure stub files for built in symbols and common extensions. The default setting includes PHP core and all bundled extensions."
                     },
                     "intelephense.completion.insertUseDeclaration": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Use declarations will be automatically inserted for namespaced classes, traits, interfaces, functions, and constants.",
-                      "scope": "window"
+                      "description": "Use declarations will be automatically inserted for namespaced classes, traits, interfaces, functions, and constants."
                     },
                     "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": {
                       "type": "boolean",
                       "default": false,
-                      "description": "Global namespace constants and functions will be fully qualified (prefixed with a backslash).",
-                      "scope": "window"
+                      "description": "Global namespace constants and functions will be fully qualified (prefixed with a backslash)."
                     },
                     "intelephense.completion.triggerParameterHints": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Method and function completions will include parentheses and trigger parameter hints.",
-                      "scope": "window"
+                      "description": "Method and function completions will include parentheses and trigger parameter hints."
                     },
                     "intelephense.completion.maxItems": {
                       "type": "number",
                       "default": 100,
-                      "description": "The maximum number of completion items returned per request.",
-                      "scope": "window"
+                      "description": "The maximum number of completion items returned per request."
                     },
                     "intelephense.format.enable": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables formatting.",
-                      "scope": "window"
+                      "description": "Enables formatting."
                     },
                     "intelephense.format.braces": {
                       "type": "string",
@@ -379,39 +368,33 @@
                         "Allman. Opening brace on the next line.",
                         "K&R (1TBS). Opening brace on the same line."
                       ],
-                      "description": "Controls formatting style of braces",
-                      "scope": "window"
+                      "description": "Controls formatting style of braces"
                     },
                     "intelephense.environment.documentRoot": {
                       "type": "string",
-                      "description": "The directory of the entry point to the application (directory of index.php). Can be absolute or relative to the workspace folder. Used for resolving script inclusion.",
-                      "scope": "resource"
+                      "description": "The directory of the entry point to the application (directory of index.php). Can be absolute or relative to the workspace folder. Used for resolving script inclusion."
                     },
                     "intelephense.environment.includePaths": {
                       "type": "array",
                       "items": {
                         "type": "string"
                       },
-                      "description": "The include paths (as individual absolute path items) as defined in the include_path ini setting or paths to external libraries. Used for resolving script inclusion and/or adding external symbols to folder.",
-                      "scope": "resource"
+                      "description": "The include paths (as individual absolute path items) as defined in the include_path ini setting or paths to external libraries. Used for resolving script inclusion and/or adding external symbols to folder."
                     },
                     "intelephense.environment.phpVersion": {
                       "type": "string",
                       "default": "7.4.0",
-                      "description": "A semver compatible string that represents the target PHP version. Used for providing version appropriate suggestions and diagnostics. PHP 5.3.0 and greater supported.",
-                      "scope": "window"
+                      "description": "A semver compatible string that represents the target PHP version. Used for providing version appropriate suggestions and diagnostics. PHP 5.3.0 and greater supported."
                     },
                     "intelephense.environment.shortOpenTag": {
                       "type": "boolean",
                       "default": false,
-                      "description": "When enabled '<?' will be parsed as a PHP open tag. Defaults to false.",
-                      "scope": "window"
+                      "description": "When enabled '<?' will be parsed as a PHP open tag. Defaults to false."
                     },
                     "intelephense.diagnostics.enable": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables diagnostics.",
-                      "scope": "window"
+                      "description": "Enables diagnostics."
                     },
                     "intelephense.diagnostics.run": {
                       "type": "string",
@@ -424,125 +407,104 @@
                         "Diagnostics will run as changes are made to the document.",
                         "Diagnostics will run when the document is saved."
                       ],
-                      "description": "Controls when diagnostics are run.",
-                      "scope": "window"
+                      "description": "Controls when diagnostics are run."
                     },
                     "intelephense.diagnostics.embeddedLanguages": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables diagnostics in embedded languages.",
-                      "scope": "window"
+                      "description": "Enables diagnostics in embedded languages."
                     },
                     "intelephense.diagnostics.undefinedSymbols": {
                       "type": "boolean",
                       "default": true,
-                      "description": "DEPRECATED. Use the setting for each symbol category.",
-                      "scope": "window"
+                      "description": "DEPRECATED. Use the setting for each symbol category."
                     },
                     "intelephense.diagnostics.undefinedVariables": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables undefined variable diagnostics.",
-                      "scope": "window"
+                      "description": "Enables undefined variable diagnostics."
                     },
                     "intelephense.diagnostics.undefinedTypes": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables undefined class, interface and trait diagnostics.",
-                      "scope": "window"
+                      "description": "Enables undefined class, interface and trait diagnostics."
                     },
                     "intelephense.diagnostics.undefinedFunctions": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables undefined function diagnostics.",
-                      "scope": "window"
+                      "description": "Enables undefined function diagnostics."
                     },
                     "intelephense.diagnostics.undefinedConstants": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables undefined constant diagnostics.",
-                      "scope": "window"
+                      "description": "Enables undefined constant diagnostics."
                     },
                     "intelephense.diagnostics.undefinedClassConstants": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables undefined class constant diagnostics.",
-                      "scope": "window"
+                      "description": "Enables undefined class constant diagnostics."
                     },
                     "intelephense.diagnostics.undefinedMethods": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables undefined method diagnostics.",
-                      "scope": "window"
+                      "description": "Enables undefined method diagnostics."
                     },
                     "intelephense.diagnostics.undefinedProperties": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables undefined static property diagnostics.",
-                      "scope": "window"
+                      "description": "Enables undefined static property diagnostics."
                     },
                     "intelephense.diagnostics.unusedSymbols": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables unused variable, private member, and import diagnostics.",
-                      "scope": "window"
+                      "description": "Enables unused variable, private member, and import diagnostics."
                     },
                     "intelephense.diagnostics.unexpectedTokens": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables unexpected token diagnostics.",
-                      "scope": "window"
+                      "description": "Enables unexpected token diagnostics."
                     },
                     "intelephense.diagnostics.duplicateSymbols": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables duplicate symbol diagnostics.",
-                      "scope": "window"
+                      "description": "Enables duplicate symbol diagnostics."
                     },
                     "intelephense.diagnostics.argumentCount": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables argument count diagnostics.",
-                      "scope": "window"
+                      "description": "Enables argument count diagnostics."
                     },
                     "intelephense.diagnostics.typeErrors": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables diagnostics on type compatibility of arguments, property assignments, and return statements where types have been declared.",
-                      "scope": "window"
+                      "description": "Enables diagnostics on type compatibility of arguments, property assignments, and return statements where types have been declared."
                     },
                     "intelephense.diagnostics.deprecated": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables deprecated diagnostics.",
-                      "scope": "window"
+                      "description": "Enables deprecated diagnostics."
                     },
                     "intelephense.diagnostics.languageConstraints": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables reporting of various language constraint errors.",
-                      "scope": "window"
+                      "description": "Enables reporting of various language constraint errors."
                     },
                     "intelephense.diagnostics.implementationErrors": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables reporting of problems associated with method and class implementations. For example, unimplemented methods or method signature incompatibilities.",
-                      "scope": "window"
+                      "description": "Enables reporting of problems associated with method and class implementations. For example, unimplemented methods or method signature incompatibilities."
                     },
                     "intelephense.runtime": {
                       "type": "string",
-                      "description": "Path to a Node.js executable. Use this if you wish to use a different version of Node.js. Defaults to Node.js shipped with VSCode.",
-                      "scope": "machine"
+                      "description": "Path to a Node.js executable."
                     },
                     "intelephense.maxMemory": {
                       "type": "number",
-                      "description": "Maximum memory (in MB) that the server should use. On some systems this may only have effect when runtime has been set. Minimum 256.",
-                      "scope": "window"
+                      "description": "Maximum memory (in MB) that the server should use. On some systems this may only have effect when runtime has been set. Minimum 256."
                     },
                     "intelephense.licenceKey": {
                       "type": "string",
-                      "description": "DEPRECATED. Don't use this. Go to command palette and search for enter licence key.",
-                      "scope": "application"
+                      "markdownDescription": "Deprecated. Use the `licenceKey` in `initializationOptions` instead."
                     },
                     "intelephense.telemetry.enabled": {
                       "type": [
@@ -550,7 +512,6 @@
                         "null"
                       ],
                       "description": "Anonymous usage and crash data will be sent to Azure Application Insights. Inherits from telemetry.enableTelemetry.",
-                      "scope": "window",
                       "default": null
                     },
                     "intelephense.rename.exclude": {
@@ -561,8 +522,7 @@
                       "default": [
                         "**/vendor/**"
                       ],
-                      "description": "Glob patterns matching files and folders that should be excluded when renaming symbols. Rename operation will fail if the symbol definition is found in the excluded files/folders.",
-                      "scope": "resource"
+                      "description": "Glob patterns matching files and folders that should be excluded when renaming symbols. Rename operation will fail if the symbol definition is found in the excluded files/folders."
                     },
                     "intelephense.references.exclude": {
                       "type": "array",
@@ -572,14 +532,12 @@
                       "default": [
                         "**/vendor/**"
                       ],
-                      "description": "Glob patterns matching files and folders that should be excluded from references search.",
-                      "scope": "resource"
+                      "description": "Glob patterns matching files and folders that should be excluded from references search."
                     },
                     "intelephense.phpdoc.returnVoid": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Adds `@return void` to auto generated phpdoc for definitions that do not return a value.",
-                      "scope": "window"
+                      "markdownDescription": "Adds `@return void` to auto generated phpdoc for definitions that do not return a value."
                     },
                     "intelephense.phpdoc.textFormat": {
                       "type": "string",
@@ -591,8 +549,7 @@
                       "enumDescriptions": [
                         "Auto generated phpdoc is returned in snippet format. Templates are partially resolved by evaluating phpdoc specific variables only.",
                         "Auto generated phpdoc is returned as plain text. Templates are resolved completely by the server."
-                      ],
-                      "scope": "window"
+                      ]
                     },
                     "intelephense.phpdoc.classTemplate": {
                       "type": "object",
@@ -619,8 +576,7 @@
                           "@package ${1:$SYMBOL_NAMESPACE}"
                         ]
                       },
-                      "description": "An object that describes the format of generated class/interface/trait phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE.",
-                      "scope": "window"
+                      "description": "An object that describes the format of generated class/interface/trait phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE."
                     },
                     "intelephense.phpdoc.propertyTemplate": {
                       "type": "object",
@@ -647,8 +603,7 @@
                           "@var ${1:$SYMBOL_TYPE}"
                         ]
                       },
-                      "description": "An object that describes the format of generated property phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE.",
-                      "scope": "window"
+                      "description": "An object that describes the format of generated property phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE."
                     },
                     "intelephense.phpdoc.functionTemplate": {
                       "type": "object",
@@ -677,14 +632,12 @@
                           "@throws ${1:$SYMBOL_TYPE} $2"
                         ]
                       },
-                      "description": "An object that describes the format of generated function/method phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE.",
-                      "scope": "window"
+                      "description": "An object that describes the format of generated function/method phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE."
                     },
                     "intelephense.phpdoc.useFullyQualifiedNames": {
                       "type": "boolean",
                       "default": false,
-                      "description": "Fully qualified names will be used for types when true. When false short type names will be used and imported where appropriate. Overrides intelephense.completion.insertUseDeclaration.",
-                      "scope": "window"
+                      "description": "Fully qualified names will be used for types when true. When false short type names will be used and imported where appropriate. Overrides intelephense.completion.insertUseDeclaration."
                     },
                     "intelephense.trace.server": {
                       "type": "string",
@@ -694,8 +647,7 @@
                         "verbose"
                       ],
                       "default": "off",
-                      "description": "Traces the communication between VSCode and the intelephense language server.",
-                      "scope": "window"
+                      "description": "Traces the communication between the LSP client and the intelephense language server."
                     }
                   }
                 }
