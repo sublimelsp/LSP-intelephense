@@ -638,16 +638,6 @@
                       "type": "boolean",
                       "default": false,
                       "description": "Fully qualified names will be used for types when true. When false short type names will be used and imported where appropriate. Overrides intelephense.completion.insertUseDeclaration."
-                    },
-                    "intelephense.trace.server": {
-                      "type": "string",
-                      "enum": [
-                        "off",
-                        "messages",
-                        "verbose"
-                      ],
-                      "default": "off",
-                      "description": "Traces the communication between the LSP client and the intelephense language server."
                     }
                   }
                 }
