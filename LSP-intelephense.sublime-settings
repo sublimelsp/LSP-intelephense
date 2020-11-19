@@ -23,7 +23,7 @@
 	},
 	// @see configuration in https://github.com/bmewburn/vscode-intelephense/blob/master/package.json
 	"settings": {
-		// There are quite lots of settings for intelephense...
+		// There are quite a lot of settings for intelephense...
 		// For a full list, you can check the link above or just use LSP-json for autocompletion.
 	},
 }
