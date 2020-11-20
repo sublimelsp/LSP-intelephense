@@ -7,4 +7,12 @@
             "default": "// Settings in here override those in \"LSP-intelephense/LSP-intelephense.sublime-settings\"\n\n{\n\t$0\n}\n",
         },
     },
+    {
+        "caption": "LSP-intelephense: Clear Cache",
+        "command": "lsp_intelephense_clear_cache",
+    },
+    {
+        "caption": "LSP-intelephense: Re-index Workspace",
+        "command": "lsp_intelephense_reindex_workspace",
+    },
 ]
