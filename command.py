@@ -47,6 +47,6 @@ class LspIntelephenseReindexWorkspaceCommand(sublime_plugin.WindowCommand):
     """ Re-index the workspace. """
 
     def run(self) -> None:
-        self.window.run_command("lsp_intelephense_clear_cache")
+        sublime.set_timeout_async(lambda: self.window.run_command("lsp_intelephense_clear_cache"), 0)
         # this will restart all servers but there is no arg to specify a certain server :shrug:
         self.window.run_command("lsp_restart_client")
