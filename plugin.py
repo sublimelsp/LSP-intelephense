@@ -1,11 +1,10 @@
+from LSP.plugin import notification_handler
+from LSP.plugin.core.typing import Dict, Optional, Tuple
+from lsp_utils import NpmClientHandler
+from sublime_lib import ActivityIndicator
 import os
 import sublime
 import tempfile
-
-from LSP.plugin.core.typing import Dict, Optional, Tuple
-
-from lsp_utils import ApiWrapperInterface, NpmClientHandler
-from sublime_lib import ActivityIndicator
 
 
 def plugin_loaded():
@@ -17,11 +16,11 @@ def plugin_unloaded():
 
 
 class LspIntelephensePlugin(NpmClientHandler):
-    package_name = __package__.partition(".")[0]
+    package_name = __package__.split(".")[0]
     server_directory = "language-server"
     server_binary_path = os.path.join(server_directory, "node_modules", "intelephense", "lib", "intelephense.js")
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
         self._activity_indicator = None  # type: Optional[ActivityIndicator]
@@ -48,15 +47,21 @@ class LspIntelephensePlugin(NpmClientHandler):
     def minimum_node_version(cls) -> Tuple[int, int, int]:
         return (10, 0, 0)
 
-    def on_ready(self, api: ApiWrapperInterface) -> None:
-        api.on_notification("indexingStarted", self.handle_indexing_started)
-        api.on_notification("indexingEnded", self.handle_indexing_ended)
+    # ---------------- #
+    # message handlers #
+    # ---------------- #
 
-    def handle_indexing_started(self, params) -> None:
+    @notification_handler("indexingStarted")
+    def handle_indexing_started(self, params: None) -> None:
         self._start_indicator("{}: Indexing...".format(self.package_name))
 
-    def handle_indexing_ended(self, params) -> None:
+    @notification_handler("indexingEnded")
+    def handle_indexing_ended(self, params: None) -> None:
         self._stop_indicator()
+
+    # -------------- #
+    # custom methods #
+    # -------------- #
 
     def _start_indicator(self, msg: str = "") -> None:
         if self._activity_indicator:
