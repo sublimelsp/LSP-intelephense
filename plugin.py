@@ -25,6 +25,11 @@ class LspIntelephensePlugin(NpmClientHandler):
 
         self._activity_indicator = None  # type: Optional[ActivityIndicator]
 
+    def __del__(self) -> None:
+        if self._activity_indicator:
+            self._activity_indicator.stop()
+            self._activity_indicator = None
+
     @classmethod
     def additional_variables(cls) -> Optional[Dict[str, str]]:
         variables = super().additional_variables() or {}
