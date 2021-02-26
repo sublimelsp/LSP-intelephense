@@ -26,8 +26,8 @@ class LspIntelephensePlugin(NpmClientHandler):
         self._activity_indicator = None  # type: Optional[ActivityIndicator]
 
     @classmethod
-    def additional_variables(cls) -> Optional[Dict[str, str]]:
-        variables = super().additional_variables() or {}
+    def get_additional_variables(cls) -> Optional[Dict[str, str]]:
+        variables = super().get_additional_variables() or {}
         variables.update(
             {
                 "cache_path": sublime.cache_path(),
