@@ -3,6 +3,7 @@ from lsp_utils import ActivityIndicator
 from lsp_utils import notification_handler
 from lsp_utils import NpmClientHandler
 import os
+import shutil
 import sublime
 import tempfile
 
@@ -42,6 +43,28 @@ class LspIntelephensePlugin(NpmClientHandler):
     @classmethod
     def minimum_node_version(cls) -> Tuple[int, int, int]:
         return (10, 0, 0)
+
+    @classmethod
+    def install_or_update(cls) -> None:
+        super().install_or_update()
+        settings, _ = cls.read_settings()
+        cache_path = settings.get("initializationOptions", {}).get("storagePath", "")
+        variables = sublime.active_window().extract_variables()
+        variables.update(cls.additional_variables())
+
+        cache_path = os.path.realpath(os.path.abspath(sublime.expand_variables(cache_path, variables)))
+        if cache_path and os.path.isdir(cache_path):
+            shutil.rmtree(cache_path, ignore_errors=True)
+
+    @classmethod
+    def on_settings_read(cls, settings: sublime.Settings) -> bool:
+
+        if cls.needs_update_or_installation():
+            initializationOptions = settings.get("initializationOptions")
+            initializationOptions.update({"clearCache": True})
+            settings.set("initializationOptions", initializationOptions)
+
+        return False
 
     # ---------------- #
     # message handlers #
