@@ -14,8 +14,8 @@
 	],
 	"initializationOptions": {
 		"clearCache": false,
-		// "storagePath": "${temp_dir}/intelephense",
-		// "globalStoragePath": "${home}/.intelephense",
+		"storagePath": "${temp_dir}/intelephense",
+		"globalStoragePath": "${home}/intelephense",
 
 		// if you want to use a premium license, you can either paste the key directly
 		// or paste it into a file and provide its absolute path here
