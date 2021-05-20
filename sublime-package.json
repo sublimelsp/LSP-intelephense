@@ -85,9 +85,11 @@
                       "items": {
                         "type": "string",
                         "enum": [
+                          "aerospike",
                           "amqp",
                           "apache",
                           "apcu",
+                          "ast",
                           "bcmath",
                           "blackfire",
                           "bz2",
@@ -96,6 +98,7 @@
                           "com_dotnet",
                           "Core",
                           "couchbase",
+                          "couchbase_v3",
                           "crypto",
                           "ctype",
                           "cubrid",
@@ -103,6 +106,7 @@
                           "date",
                           "dba",
                           "decimal",
+                          "dio",
                           "dom",
                           "ds",
                           "enchant",
@@ -141,8 +145,10 @@
                           "leveldb",
                           "libevent",
                           "libsodium",
+                          "libvirt-php",
                           "libxml",
                           "lua",
+                          "LuaSandbox",
                           "lzf",
                           "mailparse",
                           "mapscript",
@@ -215,6 +221,7 @@
                           "stomp",
                           "suhosin",
                           "superglobals",
+                          "svm",
                           "svn",
                           "sybase",
                           "sync",
@@ -235,6 +242,7 @@
                           "xcache",
                           "xdebug",
                           "xhprof",
+                          "xlswriter",
                           "xml",
                           "xmlreader",
                           "xmlrpc",
@@ -252,7 +260,8 @@
                           "zip",
                           "zlib",
                           "zmq",
-                          "zookeeper"
+                          "zookeeper",
+                          "zstd"
                         ]
                       },
                       "default": [
@@ -383,7 +392,7 @@
                     },
                     "intelephense.environment.phpVersion": {
                       "type": "string",
-                      "default": "7.4.0",
+                      "default": "8.0.0",
                       "description": "A semver compatible string that represents the target PHP version. Used for providing version appropriate suggestions and diagnostics. PHP 5.3.0 and greater supported."
                     },
                     "intelephense.environment.shortOpenTag": {
@@ -525,18 +534,18 @@
                       "description": "Glob patterns matching files and folders that should be excluded when renaming symbols. Rename operation will fail if the symbol definition is found in the excluded files/folders."
                     },
                     "intelephense.rename.namespaceMode": {
-                        "type": "string",
-                        "enum": [
-                            "single",
-                            "all"
-                        ],
-                        "default": "single",
-                        "enumDescriptions": [
-                            "Only symbols defined in the current file are affected. For example, this makes a rename of a namespace the equivalent of a single move class operation.",
-                            "All symbols that share this namespace, not necessarily defined in the current file will be affected. For example it would move all classes that share this namespace to the new namespace."
-                        ],
-                        "description": "Controls the scope of a namespace rename operation.",
-                        "scope": "window"
+                      "type": "string",
+                      "enum": [
+                        "single",
+                        "all"
+                      ],
+                      "default": "single",
+                      "enumDescriptions": [
+                        "Only symbols defined in the current file are affected. For example, this makes a rename of a namespace the equivalent of a single move class operation.",
+                        "All symbols that share this namespace, not necessarily defined in the current file will be affected. For example it would move all classes that share this namespace to the new namespace."
+                      ],
+                      "description": "Controls the scope of a namespace rename operation.",
+                      "scope": "window"
                     },
                     "intelephense.references.exclude": {
                       "type": "array",
