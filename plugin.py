@@ -56,16 +56,6 @@ class LspIntelephensePlugin(NpmClientHandler):
         if cache_path and os.path.isdir(cache_path):
             shutil.rmtree(cache_path, ignore_errors=True)
 
-    @classmethod
-    def on_settings_read(cls, settings: sublime.Settings) -> bool:
-
-        if cls.needs_update_or_installation():
-            initializationOptions = settings.get("initializationOptions")
-            initializationOptions.update({"clearCache": True})
-            settings.set("initializationOptions", initializationOptions)
-
-        return False
-
     # ---------------- #
     # message handlers #
     # ---------------- #
