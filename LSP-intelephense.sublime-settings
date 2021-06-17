@@ -3,7 +3,9 @@
 		{
 			"languageId": "php",
 			// ST3 configuration
-			"scopes": ["source.php"],
+			"scopes": [
+				"source.php"
+			],
 			"syntaxes": [
 				"Packages/PHP/PHP.sublime-syntax",
 			],
@@ -12,6 +14,7 @@
 			"feature_selector": "source.php",
 		},
 	],
+	"auto_complete_selector": "punctuation.accessor | punctuation.definition.variable | punctuation.separator.namespace | punctuation.definition.tag.begin",
 	"initializationOptions": {
 		"clearCache": false,
 		// "storagePath": "${temp_dir}/intelephense",
