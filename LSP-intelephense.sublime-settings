@@ -14,7 +14,7 @@
 			"feature_selector": "source.php",
 		},
 	],
-	"auto_complete_selector": "punctuation.accessor.arrow | punctuation.accessor.double-colon | punctuation.definition.variable | punctuation.separator.namespace | comment.block | punctuation.definition.tag.begin | punctuation.accessor.js",
+	"auto_complete_selector": "punctuation.accessor | punctuation.definition.variable | punctuation.separator.namespace | comment.block | punctuation.definition.tag.begin",
 	"initializationOptions": {
 		"clearCache": false,
 		// "storagePath": "${temp_dir}/intelephense",
