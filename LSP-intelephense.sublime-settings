@@ -14,6 +14,7 @@
 			"feature_selector": "source.php",
 		},
 	],
+	"schemes": ["file", "buffer"],
 	"auto_complete_selector": "punctuation.accessor | punctuation.definition.variable | punctuation.separator.namespace | punctuation.definition.tag.begin",
 	"initializationOptions": {
 		"clearCache": false,
