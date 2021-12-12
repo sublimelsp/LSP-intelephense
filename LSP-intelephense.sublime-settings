@@ -1,19 +1,4 @@
 {
-	"languages": [
-		{
-			"languageId": "php",
-			// ST3 configuration
-			"scopes": [
-				"source.php"
-			],
-			"syntaxes": [
-				"Packages/PHP/PHP.sublime-syntax",
-			],
-			// ST4 configuration
-			"document_selector": "embedding.php",
-			"feature_selector": "source.php",
-		},
-	],
 	"schemes": ["file", "buffer"],
 	"auto_complete_selector": "punctuation.accessor | punctuation.definition.variable | punctuation.separator.namespace | punctuation.definition.tag.begin",
 	"initializationOptions": {
@@ -31,4 +16,15 @@
 		// For a full list, you can check the link above or just use LSP-json for autocompletion.
 		"intelephense.environment.phpVersion": "8.1.0", // temporary fix for intelephense v1.8.0
 	},
+	// ST4 configuration
+	"selector": "embedding.php",
+	"feature_selector": "source.php",
+	// ST3 configuration
+	"languages": [
+		{
+			"languageId": "php",
+			"scopes": ["source.php"],
+			"syntaxes": ["Packages/PHP/PHP.sublime-syntax"],
+		},
+	],
 }
