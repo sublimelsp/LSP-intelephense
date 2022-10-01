@@ -1,10 +1,10 @@
-from LSP.plugin.core.typing import Dict, Optional, Tuple
-from lsp_utils import notification_handler
-from lsp_utils import NpmClientHandler
-from sublime_lib import ActivityIndicator
 import os
-import sublime
 import tempfile
+
+import sublime
+from LSP.plugin.core.typing import Dict, Optional, Tuple
+from lsp_utils import NpmClientHandler, notification_handler
+from sublime_lib import ActivityIndicator
 
 
 def plugin_loaded() -> None:
