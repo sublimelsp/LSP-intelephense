@@ -1,13 +1,37 @@
+[tool.isort]
+line_length = 120
+profile = 'black'
+py_version=38
+skip_glob = [
+  ".venv/**",
+  "br-*/**",
+  "branch-*/**",
+  "libs/**",
+  "resources/**",
+  "stubs/**",
+  "typings/**",
+  "vendor/**",
+  "venv/**",
+]
+
+[tool.pycln]
+all = true
+exclude = '(\.git|\.?venv|\.mypy_cache|br-.*|branch-.*|libs|stubs|typings)/'
+
 [tool.black]
 line-length = 120
 target-version = ['py38']
-
-# regex
 exclude = '''
 /(
   \.git |
   language-server |
   plugin/libs |
-  stubs
+  resources |
+  stubs |
+  typings |
+  _resources
 )/
 '''
+
+[tool.pyright]
+pythonVersion = '3.11'
