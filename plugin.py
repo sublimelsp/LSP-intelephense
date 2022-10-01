@@ -7,11 +7,11 @@ import sublime
 import tempfile
 
 
-def plugin_loaded():
+def plugin_loaded() -> None:
     LspIntelephensePlugin.setup()
 
 
-def plugin_unloaded():
+def plugin_unloaded() -> None:
     LspIntelephensePlugin.cleanup()
 
 
