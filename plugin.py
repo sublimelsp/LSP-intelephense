@@ -2,7 +2,7 @@ import os
 import tempfile
 
 import sublime
-from LSP.plugin.core.typing import Dict, Optional, Tuple
+from LSP.plugin.core.typing import Dict, Optional
 from lsp_utils import NpmClientHandler, notification_handler
 from sublime_lib import ActivityIndicator
 
@@ -40,8 +40,12 @@ class LspIntelephensePlugin(NpmClientHandler):
         return variables
 
     @classmethod
-    def minimum_node_version(cls) -> Tuple[int, int, int]:
-        return (10, 0, 0)
+    def required_node_version(cls) -> str:
+        """
+        Testing playground at https://semver.npmjs.com
+        And `0.0.0` means "no restrictions".
+        """
+        return ">14"
 
     # ---------------- #
     # message handlers #
