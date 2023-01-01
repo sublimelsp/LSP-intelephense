@@ -2,14 +2,14 @@
 
 PHP support for Sublime's LSP plugin provided through [intelephense](https://www.npmjs.com/package/intelephense).
 
-* Install [LSP](https://packagecontrol.io/packages/LSP) and [LSP-intelephense](https://packagecontrol.io/packages/LSP-intelephense) from Package Control.
-* Restart Sublime.
+- Install [LSP](https://packagecontrol.io/packages/LSP) and [LSP-intelephense](https://packagecontrol.io/packages/LSP-intelephense) from Package Control.
+- Restart Sublime.
 
-### Configuration
+## Configuration
 
 Configure the intelephense language server by accessing `Preferences > Package Settings > LSP > Servers > LSP-intelephense`.
 
-### Server issues
+## Server issues
 
 Language server related bugs report [here](https://github.com/bmewburn/vscode-intelephense).
 
