@@ -45,7 +45,7 @@ class LspIntelephensePlugin(NpmClientHandler):
         Testing playground at https://semver.npmjs.com
         And `0.0.0` means "no restrictions".
         """
-        return ">14"
+        return ">=14"
 
     # ---------------- #
     # message handlers #
