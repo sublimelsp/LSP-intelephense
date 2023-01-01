@@ -1,16 +1,19 @@
 .PHONY: all
 all: fix
 
+.PHONY: install
+install:
+	pip install -U -r requirements.txt
+
 .PHONY: check
 check:
 	mypy -p plugin
 	flake8 .
-	pycln --config pyproject.toml --check .
-	black --check --diff .
+	black --check --diff --preview .
 	isort --check --diff .
 
 .PHONY: fix
 fix:
-	pycln --config pyproject.toml .
-	black .
+	autoflake --in-place .
+	black --preview .
 	isort .
