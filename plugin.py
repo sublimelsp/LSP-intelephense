@@ -28,14 +28,12 @@ class LspIntelephensePlugin(NpmClientHandler):
     @classmethod
     def get_additional_variables(cls) -> Optional[Dict[str, str]]:
         variables = super().get_additional_variables() or {}
-        variables.update(
-            {
-                "cache_path": sublime.cache_path(),
-                "home": os.path.expanduser("~"),
-                "package_storage": cls.package_storage(),
-                "temp_dir": tempfile.gettempdir(),
-            }
-        )
+        variables.update({
+            "cache_path": sublime.cache_path(),
+            "home": os.path.expanduser("~"),
+            "package_storage": cls.package_storage(),
+            "temp_dir": tempfile.gettempdir(),
+        })
 
         return variables
 
