@@ -1,35 +1,32 @@
-[tool.isort]
-line_length = 120
-profile = 'black'
-py_version=38
-skip_glob = [
-  ".venv/**",
-  "br-*/**",
-  "branch-*/**",
-  "libs/**",
-  "resources/**",
-  "stubs/**",
-  "typings/**",
-  "vendor/**",
-  "venv/**",
-]
-
-[tool.black]
-preview = true
-line-length = 120
-target-version = ['py38']
-exclude = '''
-/(
-  \.git |
-  \.venv |
-  language-server |
-  plugin/libs |
-  resources |
-  stubs |
-  typings |
-  _resources
-)/
-'''
+[tool.basedpyright]
+pythonVersion = '3.8'
 
 [tool.pyright]
-pythonVersion = '3.11'
+pythonVersion = '3.8'
+
+[tool.ruff]
+preview = true
+line-length = 120
+target-version = 'py38'
+exclude = [
+  "*/libs/*",
+  ".git",
+  ".mypy_cache",
+  ".venv",
+  ".venv-*",
+  "branch-*",
+  "scripts/module_scraper",
+  "stubs",
+  "tests/files",
+  "typings",
+  "vendor",
+  "venv",
+  "venv-*",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP"]
+ignore = ["E203"]
+
+[tool.ruff.lint.per-file-ignores]
+"boot.py" = ["E402"]

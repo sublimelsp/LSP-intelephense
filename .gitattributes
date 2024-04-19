@@ -6,9 +6,11 @@
 .travis.yml export-ignore
 codecov.yml export-ignore
 docs/ export-ignore
+Makefile export-ignore
 mkdocs.yml export-ignore
 mypy.ini export-ignore
 pyproject.toml export-ignore
+requirements.* export-ignore
 stubs/ export-ignore
 tests/ export-ignore
 tox.ini export-ignore
