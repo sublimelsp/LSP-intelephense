@@ -15,15 +15,6 @@
 		// There are quite a lot of settings for intelephense...
 		// For a full list, you can check the link above or just use LSP-json for autocompletion.
 	},
-	// ST4 configuration
 	"selector": "embedding.php",
 	"feature_selector": "source.php",
-	// ST3 configuration
-	"languages": [
-		{
-			"languageId": "php",
-			"scopes": ["source.php"],
-			"syntaxes": ["Packages/PHP/PHP.sublime-syntax"],
-		},
-	],
 }
