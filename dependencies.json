@@ -1,7 +1,9 @@
 {
     "*": {
         "*": [
+            "Jinja2",
             "lsp_utils",
+            "markupsafe",
             "sublime_lib"
         ]
     }
