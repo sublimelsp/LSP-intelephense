@@ -4,22 +4,16 @@ import os
 import tempfile
 
 import sublime
+from LSP.plugin import ClientConfig, DottedDict, WorkspaceFolder
 from lsp_utils import NpmClientHandler, notification_handler
 from sublime_lib import ActivityIndicator
 
-assert __package__
-
-
-def plugin_loaded() -> None:
-    LspIntelephensePlugin.setup()
-
-
-def plugin_unloaded() -> None:
-    LspIntelephensePlugin.cleanup()
+from .constants import PACKAGE_NAME
+from .log import log_warning
 
 
 class LspIntelephensePlugin(NpmClientHandler):
-    package_name = __package__.partition(".")[0]
+    package_name = PACKAGE_NAME
     server_directory = "language-server"
     server_binary_path = os.path.join(server_directory, "node_modules", "intelephense", "lib", "intelephense.js")
 
@@ -27,6 +21,14 @@ class LspIntelephensePlugin(NpmClientHandler):
         super().__init__(*args, **kwargs)
 
         self._activity_indicator: ActivityIndicator | None = None
+
+    @classmethod
+    def required_node_version(cls) -> str:
+        """
+        Testing playground at https://semver.npmjs.com
+        And `0.0.0` means "no restrictions".
+        """
+        return ">=14"
 
     @classmethod
     def get_additional_variables(cls) -> dict[str, str] | None:
@@ -38,14 +40,6 @@ class LspIntelephensePlugin(NpmClientHandler):
             "temp_dir": tempfile.gettempdir(),
         })
         return variables
-
-    @classmethod
-    def required_node_version(cls) -> str:
-        """
-        Testing playground at https://semver.npmjs.com
-        And `0.0.0` means "no restrictions".
-        """
-        return ">=14"
 
     # ---------------- #
     # message handlers #
