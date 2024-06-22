@@ -33,7 +33,3 @@ ci-fix:
 	ruff check --fix .
 	@echo "========== fix: ruff (format) =========="
 	ruff format .
-
-.PHONY: update-schema
-update-schema:
-	python3 ./scripts/update_schema.py
