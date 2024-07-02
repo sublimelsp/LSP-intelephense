@@ -46,12 +46,17 @@
                     "intelephense.compatibility.correctForBaseClassStaticUnionTypes": {
                       "type": "boolean",
                       "default": true,
-                      "markdownDescription": "Resolves `BaseClass|static` union types to `static` instead of `BaseClass`."
+                      "description": "Resolves `BaseClass|static` union types to `static` instead of `BaseClass`.",
                     },
                     "intelephense.compatibility.correctForArrayAccessArrayAndTraversableArrayUnionTypes": {
                       "type": "boolean",
                       "default": true,
-                      "markdownDescription": "Resolves `ArrayAccess` and `Traversable` implementations that are unioned with a typed array to generic syntax. eg `ArrayAccessOrTraversable|ElementType[]` => `ArrayAccessOrTraversable<mixed, ElementType>`."
+                      "description": "Resolves `ArrayAccess` and `Traversable` implementations that are unioned with a typed array to generic syntax. eg `ArrayAccessOrTraversable|ElementType[]` => `ArrayAccessOrTraversable<mixed, ElementType>`.",
+                    },
+                    "intelephense.compatibility.preferPsalmPhpstanPrefixedAnnotations": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "Prefer `@psalm-` and `@phpstan-` prefixed `@return`, `@var`, `@param` tags when determining symbol types.",
                     },
                     "intelephense.files.maxSize": {
                       "type": "number",
@@ -103,7 +108,7 @@
                           "com_dotnet",
                           "Core",
                           "couchbase",
-                          "couchbase_v3",
+                          "couchbase_v2",
                           "crypto",
                           "ctype",
                           "cubrid",
@@ -114,10 +119,13 @@
                           "dio",
                           "dom",
                           "ds",
+                          "eio",
+                          "elastic_apm",
                           "enchant",
                           "Ev",
                           "event",
                           "exif",
+                          "expect",
                           "fann",
                           "FFI",
                           "ffmpeg",
@@ -179,6 +187,8 @@
                           "oci8",
                           "odbc",
                           "openssl",
+                          "opentelemetry",
+                          "pam",
                           "parallel",
                           "Parle",
                           "pcntl",
@@ -194,6 +204,7 @@
                           "Phar",
                           "phpdbg",
                           "posix",
+                          "pq",
                           "pspell",
                           "pthreads",
                           "radius",
@@ -205,12 +216,15 @@
                           "redis",
                           "Reflection",
                           "regex",
+                          "relay",
                           "rpminfo",
                           "rrd",
                           "SaxonC",
                           "session",
                           "shmop",
+                          "simple_kafka_client",
                           "SimpleXML",
+                          "snappy",
                           "snmp",
                           "soap",
                           "sockets",
@@ -229,6 +243,7 @@
                           "superglobals",
                           "svm",
                           "svn",
+                          "swoole",
                           "sybase",
                           "sync",
                           "sysvmsg",
@@ -237,6 +252,7 @@
                           "tidy",
                           "tokenizer",
                           "uopz",
+                          "uploadprogress",
                           "uuid",
                           "uv",
                           "v8js",
@@ -247,6 +263,7 @@
                           "wordpress",
                           "xcache",
                           "xdebug",
+                          "xdiff",
                           "xhprof",
                           "xlswriter",
                           "xml",
@@ -316,6 +333,7 @@
                         "Phar",
                         "posix",
                         "pspell",
+                        "random",
                         "readline",
                         "Reflection",
                         "session",
@@ -363,7 +381,12 @@
                     "intelephense.completion.maxItems": {
                       "type": "number",
                       "default": 100,
-                      "description": "The maximum number of completion items returned per request."
+                      "description": "The maximum number of completion items returned per request.",
+                    },
+                    "intelephense.completion.suggestObjectOperatorStaticMethods": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "PHP permits the calling of static methods using the object operator eg `$obj->myStaticMethod();`. If you would prefer not to have static methods suggested in this context then set this value to `false`. Defaults to `true`.",
                     },
                     "intelephense.format.enable": {
                       "type": "boolean",
@@ -372,14 +395,14 @@
                     },
                     "intelephense.format.braces": {
                       "type": "string",
-                      "default": "psr12",
+                      "default": "per",
                       "enum": [
-                        "psr12",
+                        "per",
                         "allman",
                         "k&r"
                       ],
                       "enumDescriptions": [
-                        "PHP-FIG PSR-2 and PSR-12 style. A mix of Allman and K&R",
+                        "PHP-FIG PER style. A mix of Allman and K&R. https://www.php-fig.org/per/coding-style/",
                         "Allman. Opening brace on the next line.",
                         "K&R (1TBS). Opening brace on the same line."
                       ],
@@ -387,7 +410,7 @@
                     },
                     "intelephense.environment.documentRoot": {
                       "type": "string",
-                      "description": "The directory of the entry point to the application (directory of index.php). Can be absolute or relative to the workspace folder. Used for resolving script inclusion."
+                      "description": "The directory of the entry point to the application (directory of index.php). Can be absolute or relative to the workspace folder. Used for resolving script inclusion and path suggestions."
                     },
                     "intelephense.environment.includePaths": {
                       "type": "array",
@@ -398,7 +421,7 @@
                     },
                     "intelephense.environment.phpVersion": {
                       "type": "string",
-                      "default": "8.1.0",
+                      "default": "8.3.0",
                       "description": "A semver compatible string that represents the target PHP version. Used for providing version appropriate suggestions and diagnostics. PHP 5.3.0 and greater supported."
                     },
                     "intelephense.environment.shortOpenTag": {
@@ -507,11 +530,21 @@
                     "intelephense.diagnostics.implementationErrors": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Enables reporting of problems associated with method and class implementations. For example, unimplemented methods or method signature incompatibilities."
+                      "description": "Enables reporting of problems associated with method and class implementations. For example, unimplemented methods or method signature incompatibilities.",
+                    },
+                    "intelephense.diagnostics.relaxedTypeCheck": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "This setting makes type checking less thorough by allowing contravariant (wider) types to also satisfy a type constraint. This is useful for projects that may have incomplete or innacurate typings. Set to `false` for more thorough type checks. When this setting is `true`, the `noMixedTypeCheck` setting is ignored.",
+                    },
+                    "intelephense.diagnostics.noMixedTypeCheck": {
+                      "type": "boolean",
+                      "default": true,
+                      "description": "This setting turns off type checking for the `mixed` type. This is useful for projects that may have incomplete or innacurate typings. Set to `false` to make type checking more thorough by not allowing `mixed` to satisy any type constraint. This setting has no effect when `relaxedTypeCheck` is `true`.",
                     },
                     "intelephense.runtime": {
                       "type": "string",
-                      "description": "Path to a Node.js executable."
+                      "description": "Path to a Node.js executable. Use this if you wish to use a different version of Node.js. Defaults to Node.js shipped with VSCode."
                     },
                     "intelephense.maxMemory": {
                       "type": "number",
@@ -519,7 +552,7 @@
                     },
                     "intelephense.licenceKey": {
                       "type": "string",
-                      "markdownDescription": "Deprecated. Use the `licenceKey` in `initializationOptions` instead."
+                      "description": "DEPRECATED. Don't use this. Go to command palette and search for enter licence key."
                     },
                     "intelephense.telemetry.enabled": {
                       "type": [
@@ -551,7 +584,6 @@
                         "All symbols that share this namespace, not necessarily defined in the current file will be affected. For example it would move all classes that share this namespace to the new namespace."
                       ],
                       "description": "Controls the scope of a namespace rename operation.",
-                      "scope": "window"
                     },
                     "intelephense.references.exclude": {
                       "type": "array",
@@ -566,7 +598,7 @@
                     "intelephense.phpdoc.returnVoid": {
                       "type": "boolean",
                       "default": true,
-                      "markdownDescription": "Adds `@return void` to auto generated phpdoc for definitions that do not return a value."
+                      "description": "Adds `@return void` to auto generated phpdoc for definitions that do not return a value."
                     },
                     "intelephense.phpdoc.textFormat": {
                       "type": "string",
