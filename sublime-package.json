@@ -46,17 +46,17 @@
                     "intelephense.compatibility.correctForBaseClassStaticUnionTypes": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Resolves `BaseClass|static` union types to `static` instead of `BaseClass`.",
+                      "markdownDescription": "Resolves `BaseClass|static` union types to `static` instead of `BaseClass`.",
                     },
                     "intelephense.compatibility.correctForArrayAccessArrayAndTraversableArrayUnionTypes": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Resolves `ArrayAccess` and `Traversable` implementations that are unioned with a typed array to generic syntax. eg `ArrayAccessOrTraversable|ElementType[]` => `ArrayAccessOrTraversable<mixed, ElementType>`.",
+                      "markdownDescription": "Resolves `ArrayAccess` and `Traversable` implementations that are unioned with a typed array to generic syntax. eg `ArrayAccessOrTraversable|ElementType[]` => `ArrayAccessOrTraversable<mixed, ElementType>`.",
                     },
                     "intelephense.compatibility.preferPsalmPhpstanPrefixedAnnotations": {
                       "type": "boolean",
                       "default": false,
-                      "description": "Prefer `@psalm-` and `@phpstan-` prefixed `@return`, `@var`, `@param` tags when determining symbol types.",
+                      "markdownDescription": "Prefer `@psalm-` and `@phpstan-` prefixed `@return`, `@var`, `@param` tags when determining symbol types.",
                     },
                     "intelephense.files.maxSize": {
                       "type": "number",
@@ -386,7 +386,7 @@
                     "intelephense.completion.suggestObjectOperatorStaticMethods": {
                       "type": "boolean",
                       "default": true,
-                      "description": "PHP permits the calling of static methods using the object operator eg `$obj->myStaticMethod();`. If you would prefer not to have static methods suggested in this context then set this value to `false`. Defaults to `true`.",
+                      "markdownDescription": "PHP permits the calling of static methods using the object operator eg `$obj->myStaticMethod();`. If you would prefer not to have static methods suggested in this context then set this value to `false`. Defaults to `true`.",
                     },
                     "intelephense.format.enable": {
                       "type": "boolean",
@@ -535,12 +535,12 @@
                     "intelephense.diagnostics.relaxedTypeCheck": {
                       "type": "boolean",
                       "default": true,
-                      "description": "This setting makes type checking less thorough by allowing contravariant (wider) types to also satisfy a type constraint. This is useful for projects that may have incomplete or innacurate typings. Set to `false` for more thorough type checks. When this setting is `true`, the `noMixedTypeCheck` setting is ignored.",
+                      "markdownDescription": "This setting makes type checking less thorough by allowing contravariant (wider) types to also satisfy a type constraint. This is useful for projects that may have incomplete or innacurate typings. Set to `false` for more thorough type checks. When this setting is `true`, the `noMixedTypeCheck` setting is ignored.",
                     },
                     "intelephense.diagnostics.noMixedTypeCheck": {
                       "type": "boolean",
                       "default": true,
-                      "description": "This setting turns off type checking for the `mixed` type. This is useful for projects that may have incomplete or innacurate typings. Set to `false` to make type checking more thorough by not allowing `mixed` to satisy any type constraint. This setting has no effect when `relaxedTypeCheck` is `true`.",
+                      "markdownDescription": "This setting turns off type checking for the `mixed` type. This is useful for projects that may have incomplete or innacurate typings. Set to `false` to make type checking more thorough by not allowing `mixed` to satisy any type constraint. This setting has no effect when `relaxedTypeCheck` is `true`.",
                     },
                     "intelephense.runtime": {
                       "type": "string",
@@ -598,7 +598,7 @@
                     "intelephense.phpdoc.returnVoid": {
                       "type": "boolean",
                       "default": true,
-                      "description": "Adds `@return void` to auto generated phpdoc for definitions that do not return a value."
+                      "markdownDescription": "Adds `@return void` to auto generated phpdoc for definitions that do not return a value."
                     },
                     "intelephense.phpdoc.textFormat": {
                       "type": "string",
