@@ -20,5 +20,5 @@
 		"statusText": "{% if server_version %}v{{ server_version }}{% endif %}",
 	},
 	"selector": "embedding.php",
-	"feature_selector": "source.php",
+	"priority_selector": "source.php",
 }
