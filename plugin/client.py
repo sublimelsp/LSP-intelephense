@@ -39,6 +39,13 @@ class LspIntelephensePlugin(NpmClientHandler):
         """
         return ">=14"
 
+    @classmethod
+    def should_ignore(cls, view: sublime.View) -> bool:
+        # ignore SublimeREPL views
+        if view.settings().get("repl"):
+            return True
+        return False
+
     def on_settings_changed(self, settings: DottedDict) -> None:
         super().on_settings_changed(settings)
 
