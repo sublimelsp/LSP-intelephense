@@ -3,11 +3,11 @@ from __future__ import annotations
 import json
 import os
 import tempfile
-from pathlib import Path
 from typing import Any
 
+import jmespath
 import sublime
-from LSP.plugin import ClientConfig, DottedDict, WorkspaceFolder
+from LSP.plugin import DottedDict
 from lsp_utils import NpmClientHandler, notification_handler
 from sublime_lib import ActivityIndicator
 
@@ -21,8 +21,6 @@ class LspIntelephensePlugin(NpmClientHandler):
     server_directory = "language-server"
     server_binary_path = os.path.join(server_directory, "node_modules", "intelephense", "lib", "intelephense.js")
 
-    server_package_json_path = os.path.join("node_modules", "intelephense", "package.json")
-    """The path to the `package.json` file of the language server."""
     server_version = ""
     """The version of the language server."""
 
@@ -46,23 +44,16 @@ class LspIntelephensePlugin(NpmClientHandler):
             return True
         return False
 
+    @classmethod
+    def setup(cls) -> None:
+        super().setup()
+
+        cls.server_version = cls.parse_server_version()
+
     def on_settings_changed(self, settings: DottedDict) -> None:
         super().on_settings_changed(settings)
 
         self.update_status_bar_text()
-
-    @classmethod
-    def on_pre_start(
-        cls,
-        window: sublime.Window,
-        initiating_view: sublime.View,
-        workspace_folders: list[WorkspaceFolder],
-        configuration: ClientConfig,
-    ) -> str | None:
-        super().on_pre_start(window, initiating_view, workspace_folders, configuration)
-
-        cls.server_version = cls.parse_server_version()
-        return None
 
     @classmethod
     def get_additional_variables(cls) -> dict[str, str]:
@@ -112,10 +103,8 @@ class LspIntelephensePlugin(NpmClientHandler):
 
     @classmethod
     def parse_server_version(cls) -> str:
-        if server_dir := cls._server_directory_path():
-            with open(Path(server_dir) / cls.server_package_json_path, "rb") as f:
-                return json.load(f).get("version", "")
-        return ""
+        lock_file_content = sublime.load_resource(f"Packages/{PACKAGE_NAME}/language-server/package-lock.json")
+        return jmespath.search("dependencies.intelephense.version", json.loads(lock_file_content)) or ""
 
     def _start_indicator(self, msg: str = "") -> None:
         if self._activity_indicator:
