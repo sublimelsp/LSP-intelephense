@@ -39,10 +39,12 @@ class LspIntelephensePlugin(NpmClientHandler):
 
     @classmethod
     def should_ignore(cls, view: sublime.View) -> bool:
-        # ignore SublimeREPL views
-        if view.settings().get("repl"):
-            return True
-        return False
+        return bool(
+            # SublimeREPL views
+            view.settings().get("repl")
+            # syntax test files
+            or os.path.basename(view.file_name() or "").startswith("syntax_test")
+        )
 
     @classmethod
     def setup(cls) -> None:
