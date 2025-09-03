@@ -8,7 +8,7 @@ markupsafe==2.1.5
     # via jinja2
 mypy==1.11.0
     # via -r requirements-dev.in
-mypy-extensions==1.0.0
+mypy-extensions==1.1.0
     # via mypy
 ruff==0.5.3
     # via -r requirements-dev.in
