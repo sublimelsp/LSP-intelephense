@@ -6,5 +6,5 @@ jmespath==1.0.1
     # via -r requirements.in
 markupsafe==2.1.5
     # via jinja2
-typing-extensions==4.12.2
+typing-extensions==4.15.0
     # via -r requirements.in
