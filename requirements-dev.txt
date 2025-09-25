@@ -6,17 +6,17 @@ jmespath==1.0.1
     # via -r requirements.in
 markupsafe==2.1.5
     # via jinja2
-mypy==1.11.0
+mypy==1.18.2
     # via -r requirements-dev.in
-mypy-extensions==1.0.0
+mypy-extensions==1.1.0
     # via mypy
-ruff==0.5.3
+ruff==0.13.2
     # via -r requirements-dev.in
 tomli==2.2.1
     # via mypy
-types-jmespath==1.0.2.20240106
+types-jmespath==1.0.2.20250809
     # via -r requirements-dev.in
-typing-extensions==4.12.2
+typing-extensions==4.15.0
     # via
     #   -r requirements.in
     #   mypy
