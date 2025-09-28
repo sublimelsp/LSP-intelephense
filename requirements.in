@@ -1,3 +1,0 @@
-Jinja2>=3,<4
-jmespath>=1,<2
-typing-extensions>=4.12

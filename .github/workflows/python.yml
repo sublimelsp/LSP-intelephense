@@ -1,0 +1,45 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python
+
+on:
+  push:
+    branches:
+      - '**'
+    paths:
+      - '.github/workflows/python.yml'
+      - '**.py'
+      - '**.pyi'
+      - 'Makefile'
+  pull_request:
+    branches:
+      - '**'
+    paths:
+      - '.github/workflows/python.yml'
+      - '**.py'
+      - '**.pyi'
+      - 'Makefile'
+
+jobs:
+  job_lint:
+    name: ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: ['ubuntu-latest']
+        python-version: ['3.8']
+
+    steps:
+      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@v5
+        with:
+          submodules: recursive
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Do linting
+        run: |
+          make ci-check
