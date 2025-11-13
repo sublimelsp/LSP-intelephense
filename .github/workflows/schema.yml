@@ -1,0 +1,63 @@
+name: Check configuration schema changes
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'language-server/package.json'
+  workflow_dispatch:
+
+permissions:
+  pull-requests: write
+  repository-projects: write
+
+jobs:
+  new_settings:
+    name: Check configuration schema changes
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Get TAG from PR
+        id: tag-to
+        run: echo "TAG=v$(jq '.dependencies.intelephense' --raw-output "language-server/package.json")" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v5
+        with:
+          ref: master
+
+      - name: Get TAG from master
+        id: tag-from
+        run: echo "TAG=v$(jq '.dependencies.intelephense' --raw-output "language-server/package.json")" >> "$GITHUB_OUTPUT"
+
+      - if: steps.tag-from.outputs.TAG != steps.tag-to.outputs.TAG
+        name: Run new_settings.sh script
+        id: new_settings
+        run: |
+          {
+            echo 'CHANGES<<EOF'
+            ./scripts/diff_upstream_schema.sh ${{ steps.tag-from.outputs.TAG }} ${{ steps.tag-to.outputs.TAG }}
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+
+      - if: steps.tag-from.outputs.TAG != steps.tag-to.outputs.TAG
+        name: Find Comment
+        uses: peter-evans/find-comment@v4
+        id: find-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+
+      - if: steps.tag-from.outputs.TAG != steps.tag-to.outputs.TAG
+        name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v5
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ```diff
+            ${{ steps.new_settings.outputs.CHANGES }}
+            ```
+          edit-mode: replace
