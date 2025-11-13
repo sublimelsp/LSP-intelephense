@@ -635,16 +635,16 @@
                       "markdownDescription": "Enables reporting of errors associated with type member access.",
                       "scope": "window"
                     },
-                    "intelephense.runtime": {
-                      "type": "string",
-                      "markdownDescription": "Path to a Node.js executable. Use this if you wish to use a different version of Node.js. Defaults to Node.js shipped with VSCode.",
-                      "scope": "machine"
-                    },
-                    "intelephense.maxMemory": {
-                      "type": "number",
-                      "markdownDescription": "Maximum memory (in MB) that the server should use. On some systems this may only have effect when runtime has been set. Minimum 256.",
-                      "scope": "window"
-                    },
+                    // "intelephense.runtime": {
+                    //   "type": "string",
+                    //   "markdownDescription": "Path to a Node.js executable. Use this if you wish to use a different version of Node.js. Defaults to Node.js shipped with VSCode.",
+                    //   "scope": "machine"
+                    // },
+                    // "intelephense.maxMemory": {
+                    //   "type": "number",
+                    //   "markdownDescription": "Maximum memory (in MB) that the server should use. On some systems this may only have effect when runtime has been set. Minimum 256.",
+                    //   "scope": "window"
+                    // },
                     "intelephense.licenceKey": {
                       "type": "string",
                       "markdownDescription": "DEPRECATED. Don't use this. Go to command palette and search for enter licence key.",
@@ -846,12 +846,12 @@
                       "markdownDescription": "Enable a code lens that indicates if a method has a parent implementation and command to peek location.",
                       "scope": "window"
                     },
-                    "intelephense.shortOpenEchoAutoClose": {
-                      "type": "boolean",
-                      "default": true,
-                      "markdownDescription": "Will auto-close short open echo tags (`<?=`). VSCode only.",
-                      "scope": "window"
-                    },
+                    // "intelephense.shortOpenEchoAutoClose": {
+                    //   "type": "boolean",
+                    //   "default": true,
+                    //   "markdownDescription": "Will auto-close short open echo tags (`<?=`). VSCode only.",
+                    //   "scope": "window"
+                    // },
                     "intelephense.inlayHint.returnTypes": {
                       "type": "boolean",
                       "default": true,
