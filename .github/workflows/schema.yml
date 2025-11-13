@@ -38,7 +38,7 @@ jobs:
         run: |
           {
             echo 'CHANGES<<EOF'
-            ./scripts/diff_upstream_schema.py.sh ${{ steps.tag-from.outputs.TAG }} ${{ steps.tag-to.outputs.TAG }}
+            ./scripts/diff_upstream_schema.sh ${{ steps.tag-from.outputs.TAG }} ${{ steps.tag-to.outputs.TAG }}
             echo EOF
           } >> "$GITHUB_OUTPUT"
 
