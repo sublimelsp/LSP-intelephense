@@ -46,7 +46,7 @@ settings_to=$(jq ".contributes.configuration" "${REPO_DIR}/${CONFIGURATION_FILE_
 rm -rf "${REPO_DIR}"
 
 # Returns with error code when there are changes.
-echo "Following are the [configuration schema](${GITHUB_REPO_URL}/blob/${tag_to}/${CONFIGURATION_FILE_PATH}) changes between tags \`${tag_from}\` and \`${tag_to}\`. Make sure that those are reflected in \`${PACKAGE_CONFIGURATION_FILE}\` and \`sublime-package.json\` files."
+echo "Following are the [configuration schema](${GITHUB_REPO_URL}/blob/${tag_to}/${CONFIGURATION_FILE_PATH}) changes between tags \`${tag_from}\` and \`${tag_to}\`. Make sure that those are reflected in \`sublime-package.json\` file."
 changes=$(diff -u <(echo "$settings_from") <(echo "$settings_to") || echo "")
 if [ "$changes" = "" ]; then
    echo "No changes"
