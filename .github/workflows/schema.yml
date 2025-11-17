@@ -56,8 +56,5 @@ jobs:
         with:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            ```diff
-            ${{ steps.new_settings.outputs.CHANGES }}
-            ```
+          body: ${{ steps.new_settings.outputs.CHANGES }}
           edit-mode: replace
