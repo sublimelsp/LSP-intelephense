@@ -18,13 +18,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Get TAG from PR
         id: tag-to
         run: echo "TAG=v$(jq '.dependencies.intelephense' --raw-output "language-server/package.json")" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           ref: master
 
