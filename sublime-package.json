@@ -733,7 +733,8 @@
                           "@package \\${1:\\$SYMBOL_NAMESPACE}"
                         ]
                       },
-                      "markdownDescription": "An object that describes the format of generated class/interface/trait phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE."
+                      "markdownDescription": "An object that describes the format of generated class/interface/trait phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE.",
+                      "scope": "window"
                     },
                     "intelephense.phpdoc.propertyTemplate": {
                       "type": "object",
