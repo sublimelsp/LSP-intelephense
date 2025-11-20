@@ -47,9 +47,12 @@ rm -rf "${REPO_DIR}"
 
 # Returns with error code when there are changes.
 echo "Following are the [configuration schema](${GITHUB_REPO_URL}/blob/${tag_to}/${CONFIGURATION_FILE_PATH}) changes between tags \`${tag_from}\` and \`${tag_to}\`. Make sure that those are reflected in \`sublime-package.json\` file."
+echo
 changes=$(diff -u <(echo "$settings_from") <(echo "$settings_to") || echo "")
 if [ "$changes" = "" ]; then
    echo "No changes"
 else
+   echo "\`\`\`diff"
    echo "$changes"
+   echo "\`\`\`"
 fi
