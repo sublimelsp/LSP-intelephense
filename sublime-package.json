@@ -43,16 +43,10 @@
                       "markdownDescription": "The (Jinja2) template of the status bar text which is inside the parentheses `(...)`. See https://jinja.palletsprojects.com/templates/",
                       "type": "string"
                     },
-                    "intelephense.compatibility.correctForBaseClassStaticUnionTypes": {
-                      "type": "boolean",
-                      "default": true,
-                      "markdownDescription": "Resolves `BaseClass|static` union types to `static` instead of `BaseClass`.",
-                      "scope": "window"
-                    },
                     "intelephense.compatibility.correctForArrayAccessArrayAndTraversableArrayUnionTypes": {
                       "type": "boolean",
                       "default": true,
-                      "markdownDescription": "Resolves `ArrayAccess` and `Traversable` implementations that are unioned with a typed array to generic syntax. eg `ArrayAccessOrTraversable|ElementType[]` => `ArrayAccessOrTraversable<mixed, ElementType>`.",
+                      "markdownDescription": "Resolves `ArrayAccess` and `Traversable` implementations that are unioned with a typed array to generic syntax.\n\nFor example: `ArrayAccessAndTraversable|Element[]` => `ArrayAccessAndTraversable&ArrayAccess<int, Element>&Traversable<int, Element>`.",
                       "scope": "window"
                     },
                     "intelephense.compatibility.preferPsalmPhpstanPrefixedAnnotations": {
@@ -485,7 +479,7 @@
                     },
                     "intelephense.environment.phpVersion": {
                       "type": "string",
-                      "default": "8.4.0",
+                      "default": "8.5.0",
                       "markdownDescription": "A semver compatible string that represents the target PHP version. Used for providing version appropriate suggestions and diagnostics. PHP 5.3.0 and greater supported.",
                       "scope": "window"
                     },
@@ -739,7 +733,7 @@
                           "@package \\${1:\\$SYMBOL_NAMESPACE}"
                         ]
                       },
-                      "description": "An object that describes the format of generated class/interface/trait phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE."
+                      "markdownDescription": "An object that describes the format of generated class/interface/trait phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE."
                     },
                     "intelephense.phpdoc.propertyTemplate": {
                       "type": "object",
