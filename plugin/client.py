@@ -3,19 +3,21 @@ from __future__ import annotations
 import json
 import os
 import tempfile
-from typing import Any
+from typing import Any, final
 
 import jmespath
 import sublime
-from LSP.plugin import DottedDict
+from LSP.plugin import ClientConfig, DottedDict
 from lsp_utils import NpmClientHandler, notification_handler
 from sublime_lib import ActivityIndicator
+from typing_extensions import override
 
 from .constants import PACKAGE_NAME
 from .log import log_warning
 from .template import load_string_template
 
 
+@final
 class LspIntelephensePlugin(NpmClientHandler):
     package_name = PACKAGE_NAME
     server_directory = "language-server"
@@ -29,6 +31,7 @@ class LspIntelephensePlugin(NpmClientHandler):
 
         self._activity_indicator: ActivityIndicator | None = None
 
+    @override
     @classmethod
     def required_node_version(cls) -> str:
         """
@@ -37,26 +40,29 @@ class LspIntelephensePlugin(NpmClientHandler):
         """
         return ">=14"
 
+    @override
     @classmethod
-    def should_ignore(cls, view: sublime.View) -> bool:
+    def is_applicable(cls, view: sublime.View, config: ClientConfig) -> bool:
         return bool(
-            # SublimeREPL views
-            view.settings().get("repl")
-            # syntax test files
-            or os.path.basename(view.file_name() or "").startswith("syntax_test")
+            super().is_applicable(view, config)
+            # REPL views (https://github.com/sublimelsp/LSP-pyright/issues/343)
+            and not view.settings().get("repl")
         )
 
+    @override
     @classmethod
     def setup(cls) -> None:
         super().setup()
 
         cls.server_version = cls.parse_server_version()
 
+    @override
     def on_settings_changed(self, settings: DottedDict) -> None:
         super().on_settings_changed(settings)
 
         self.update_status_bar_text()
 
+    @override
     @classmethod
     def get_additional_variables(cls) -> dict[str, str]:
         variables = super().get_additional_variables() or {}
