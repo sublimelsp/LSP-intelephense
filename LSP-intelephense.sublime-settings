@@ -1,7 +1,7 @@
 {
 	"schemes": ["file", "buffer"],
 	"auto_complete_selector": "punctuation.accessor | punctuation.definition.variable | punctuation.separator.namespace | punctuation.definition.tag.begin",
-	"initializationOptions": {
+	"initialization_options": {
 		"clearCache": false,
 		// "storagePath": "${temp_dir}/intelephense",
 		// "globalStoragePath": "${home}/.intelephense",

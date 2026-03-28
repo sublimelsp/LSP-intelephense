@@ -7,8 +7,8 @@ from typing import Any, final
 
 import jmespath
 import sublime
-from LSP.plugin import ClientConfig, DottedDict
-from lsp_utils import NpmClientHandler, notification_handler
+from LSP.plugin import ClientConfig, DottedDict, notification_handler
+from lsp_utils import NpmClientHandler
 from sublime_lib import ActivityIndicator
 from typing_extensions import override
 
