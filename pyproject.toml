@@ -67,3 +67,9 @@ ignore = ["E203"]
 
 [tool.ruff.lint.per-file-ignores]
 "boot.py" = ["E402"]
+
+[tool.ruff.lint.isort]
+case-sensitive = true
+combine-as-imports = true
+order-by-type = false
+required-imports = ["from __future__ import annotations"]
