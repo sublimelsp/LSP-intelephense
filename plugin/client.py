@@ -1,21 +1,20 @@
 from __future__ import annotations
 
+import json
+import os
+import tempfile
+from typing import Any, final
+
+import jmespath
+import sublime
+from LSP.plugin import ClientConfig, DottedDict, notification_handler
+from lsp_utils import NpmClientHandler
+from sublime_lib import ActivityIndicator
+from typing_extensions import override
+
 from .constants import PACKAGE_NAME
 from .log import log_warning
 from .template import load_string_template
-from LSP.plugin import ClientConfig
-from LSP.plugin import DottedDict
-from LSP.plugin import notification_handler
-from lsp_utils import NpmClientHandler
-from sublime_lib import ActivityIndicator
-from typing import Any
-from typing import final
-from typing_extensions import override
-import jmespath
-import json
-import os
-import sublime
-import tempfile
 
 
 @final
