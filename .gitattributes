@@ -21,6 +21,7 @@ requirements* export-ignore
 requirements.* export-ignore
 scripts/ export-ignore
 stubs/ export-ignore
+sublime-package.overrides.json export-ignore
 tests/ export-ignore
 tox.ini export-ignore
 typings/ export-ignore

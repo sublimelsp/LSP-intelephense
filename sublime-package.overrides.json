@@ -1,0 +1,20 @@
+{
+    "add": {
+        "statusText": {
+          "default": "{% if server_version %}v{{ server_version }}{% endif %}",
+          "markdownDescription": "The (Jinja2) template of the status bar text which is inside the parentheses `(...)`. See https://jinja.palletsprojects.com/templates/",
+          "type": "string"
+        }
+    },
+    "remove": [
+        "intelephense.licenceKey",
+        "intelephense.maxMemory",
+        "intelephense.runtime",
+        "intelephense.shortOpenEchoAutoClose",
+        "intelephense.trace.server"
+    ],
+    "transform": [
+        "walk(if type == \"object\" and has(\"summary\") and (.summary | type == \"string\") then .summary |= gsub(\"\\\\$\"; \"\\\\$\") else . end)",
+        "walk(if type == \"object\" and has(\"tags\") and (.tags | type == \"array\") then .tags |= map(if type == \"string\" then gsub(\"\\\\$\"; \"\\\\$\") else . end) else . end)"
+    ]
+}
