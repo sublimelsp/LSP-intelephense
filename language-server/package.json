@@ -1,6 +1,6 @@
 {
   "private": true,
   "dependencies": {
-    "intelephense": "1.18.1"
+    "intelephense": "1.18.2"
   }
 }
