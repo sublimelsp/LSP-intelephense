@@ -1,0 +1,78 @@
+{
+  "contributions": {
+    "settings": [
+      {
+        "file_patterns": [
+          "/LSP-intelephense.sublime-settings"
+        ],
+        "schema": {
+          "$id": "sublime://settings/LSP-intelephense",
+          "definitions": {
+            "PluginConfig": {
+              "properties": {
+                "initialization_options": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "clearCache": {
+                      "type": "boolean",
+                      "default": false,
+                      "description": "Clear server state on startup."
+                    },
+                    "globalStoragePath": {
+                      "type": "string",
+                      "default": "${home}/.intelephense",
+                      "markdownDescription": "Absolute path to global dir. Defaults to `os.homedir()`."
+                    },
+                    "licenceKey": {
+                      "type": "string",
+                      "default": "",
+                      "description": "Licence key or absolute path to a text file containing the licence key."
+                    },
+                    "storagePath": {
+                      "type": "string",
+                      "default": "${temp_dir}/intelephense",
+                      "markdownDescription": "Absolute path to storage dir. Defaults to `os.tmpdir()`."
+                    }
+                  }
+                },
+                "settings": {
+                  "additionalProperties": false,
+                  "properties": {{ settings | indent(18) }}
+                }
+              }
+            }
+          },
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "sublime://settings/LSP-plugin-base"
+            },
+            {
+              "$ref": "sublime://settings/LSP-intelephense#/definitions/PluginConfig"
+            }
+          ]
+        }
+      },
+      {
+        "file_patterns": [
+          "/*.sublime-project"
+        ],
+        "schema": {
+          "properties": {
+            "settings": {
+              "properties": {
+                "LSP": {
+                  "properties": {
+                    "LSP-intelephense": {
+                      "$ref": "sublime://settings/LSP-intelephense#/definitions/PluginConfig"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

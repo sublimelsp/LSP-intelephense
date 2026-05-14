@@ -19,8 +19,10 @@ pyrightconfig.json export-ignore
 renovate.json export-ignore
 requirements* export-ignore
 requirements.* export-ignore
+settings-processor.json export-ignore
 scripts/ export-ignore
 stubs/ export-ignore
+templates/ export-ignore
 tests/ export-ignore
 tox.ini export-ignore
 typings/ export-ignore
