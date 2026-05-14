@@ -10,28 +10,22 @@
 		// or paste it into a file and provide its absolute path here
 		// "licenceKey": "${packages}/User/intelephense-license.txt",
 	},
-	// @see configuration in https://github.com/bmewburn/vscode-intelephense/blob/master/package.json
 	"settings": {
 		// The (Jinja2) template of the status bar text which is inside the parentheses `(...)`. See https://jinja.palletsprojects.com/templates/
 		"statusText": "{% if server_version %}v{{ server_version }}{% endif %}",
-
 		// Resolves `ArrayAccess` and `Traversable` implementations that are unioned with a typed array to generic syntax.
 		//
 		// For example: `ArrayAccessAndTraversable|Element[]` => `ArrayAccessAndTraversable&ArrayAccess<int, Element>&Traversable<int, Element>`.
 		"intelephense.compatibility.correctForArrayAccessArrayAndTraversableArrayUnionTypes": true,
-
 		// Prefer `@psalm-` and `@phpstan-` prefixed `@return`, `@var`, `@param` tags when determining symbol types.
 		"intelephense.compatibility.preferPsalmPhpstanPrefixedAnnotations": false,
-
 		// Maximum file size in bytes.
 		"intelephense.files.maxSize": 1000000,
-
 		// Configure glob patterns to make files available for language server features. Inherits from files.associations.
 		"intelephense.files.associations": [
 			"*.php",
 			"*.phtml"
 		],
-
 		// Configure glob patterns to exclude certain files and folders from all language server features. Inherits from files.exclude.
 		"intelephense.files.exclude": [
 			"**/.git/**",
@@ -45,7 +39,6 @@
 			"**/.history/**",
 			"**/vendor/**/vendor/**"
 		],
-
 		// Configure stub files for built in symbols and common extensions. The default setting includes PHP core and all bundled extensions.
 		"intelephense.stubs": [
 			"apache",
@@ -118,169 +111,111 @@
 			"zip",
 			"zlib"
 		],
-
 		// Use declarations will be automatically inserted for namespaced classes, traits, interfaces, functions, and constants.
 		"intelephense.completion.insertUseDeclaration": true,
-
 		// Global namespace constants and functions will be fully qualified (prefixed with a backslash).
 		"intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": false,
-
 		// Method and function completions will include parentheses and trigger parameter hints.
 		"intelephense.completion.triggerParameterHints": true,
-
 		// The maximum number of completion items returned per request.
 		"intelephense.completion.maxItems": 100,
-
 		// PHP permits the calling of static methods using the object operator eg `$obj->myStaticMethod();`. If you would prefer not to have static methods suggested in this context then set this value to `false`. Defaults to `true`.
 		"intelephense.completion.suggestObjectOperatorStaticMethods": true,
-
 		// The preferred font case to use when suggesting parameter names. Defaults to camel case.
 		"intelephense.completion.parameterCase": "camel",
-
 		// The preferred font case to use when suggesting property names. Defaults to snake case.
 		"intelephense.completion.propertyCase": "snake",
-
 		// Inserted text will be relative to any existing partial use declarations that may match the symbol. The value is the maximum number of namespace segments that may appear in the inserted text. Defaults to 0 (disabled).
 		"intelephense.completion.suggestRelativeToPartialUseDeclaration": 0,
-
 		// Controls whether suggestions will include a `sortText` property that may influence sort order.
 		"intelephense.completion.sortText": "multi-factor",
-
 		// Method completions will include an `#[Override]` attribute where appropriate if targeting PHP 8.3+.
 		"intelephense.completion.withOverrideAttribute": true,
-
 		// Method completions will include either a `parent` call or a `throw new Exception('Not implemented')` in the method body.
 		"intelephense.completion.withMethodBody": true,
-
 		// Enables formatting.
 		"intelephense.format.enable": true,
-
 		// Controls formatting style of braces
 		"intelephense.format.braces": "per",
-
-		// The directory of the entry point to the application (directory of index.php). Can be absolute or relative to the workspace folder. Used for resolving script inclusion and path suggestions.
-		"intelephense.environment.documentRoot": null,
-
-		// The include paths (as individual path items) as defined in the include_path ini setting or paths to external libraries. Can be absolute or relative to the workspace folder. Used for resolving script inclusion and/or adding external symbols to folder.
-		"intelephense.environment.includePaths": null,
-
 		// A semver compatible string that represents the target PHP version. Used for providing version appropriate suggestions and diagnostics. PHP 5.3.0 and greater supported.
 		"intelephense.environment.phpVersion": "8.5.0",
-
 		// When enabled '<?' will be parsed as a PHP open tag. Defaults to true.
 		"intelephense.environment.shortOpenTag": true,
-
 		// Enables diagnostics.
 		"intelephense.diagnostics.enable": true,
-
 		// Controls when diagnostics are run.
 		"intelephense.diagnostics.run": "onType",
-
 		// Enables diagnostics in embedded languages.
 		"intelephense.diagnostics.embeddedLanguages": true,
-
 		// DEPRECATED. Use the setting for each symbol category.
 		"intelephense.diagnostics.undefinedSymbols": true,
-
 		// Enables undefined variable diagnostics.
-		"intelephense.diagnostics.undefinedVariables": true,
-
+		"intelephense.diagnostics.undefinedVariables": "on",
 		// Enables undefined class, interface and trait diagnostics.
 		"intelephense.diagnostics.undefinedTypes": true,
-
 		// Enables undefined function diagnostics.
 		"intelephense.diagnostics.undefinedFunctions": true,
-
 		// Enables undefined constant diagnostics.
 		"intelephense.diagnostics.undefinedConstants": true,
-
 		// Enables undefined class constant diagnostics.
 		"intelephense.diagnostics.undefinedClassConstants": true,
-
 		// Enables undefined method diagnostics.
 		"intelephense.diagnostics.undefinedMethods": true,
-
 		// Enables undefined property diagnostics.
 		"intelephense.diagnostics.undefinedProperties": true,
-
 		// Enables unused variable, private member, and import diagnostics.
 		"intelephense.diagnostics.unusedSymbols": true,
-
 		// Enables unexpected token diagnostics.
 		"intelephense.diagnostics.unexpectedTokens": true,
-
 		// Enables duplicate symbol diagnostics.
 		"intelephense.diagnostics.duplicateSymbols": true,
-
 		// Enables argument count diagnostics.
-		"intelephense.diagnostics.argumentCount": true,
-
+		"intelephense.diagnostics.argumentCount": "on",
 		// Enables diagnostics on type compatibility of arguments, property assignments, and return statements where types have been declared.
 		"intelephense.diagnostics.typeErrors": true,
-
 		// Enables deprecated diagnostics.
 		"intelephense.diagnostics.deprecated": true,
-
 		// Enables reporting of various language constraint errors.
 		"intelephense.diagnostics.languageConstraints": true,
-
 		// Enables reporting of problems associated with method and class implementations. For example, unimplemented methods or method signature incompatibilities.
 		"intelephense.diagnostics.implementationErrors": true,
-
 		// This setting makes type checking less thorough by allowing contravariant (wider) types to also satisfy a type constraint. This is useful for projects that may have incomplete or innacurate typings. Set to `false` for more thorough type checks. When this setting is `true`, the `noMixedTypeCheck` setting is ignored.
 		"intelephense.diagnostics.relaxedTypeCheck": true,
-
 		// This setting turns off type checking for the `mixed` type. This is useful for projects that may have incomplete or innacurate typings. Set to `false` to make type checking more thorough by not allowing `mixed` to satisy any type constraint. This setting has no effect when `relaxedTypeCheck` is `true`.
 		"intelephense.diagnostics.noMixedTypeCheck": true,
-
 		// Enables reporting of errors associated with type member access.
 		"intelephense.diagnostics.memberAccess": true,
-
 		// Enables reporting of unreachable code.
 		"intelephense.diagnostics.unreachableCode": true,
-
 		// Enables reporting of irregularities in code that may be indicative of a bug. For example, assignments in a conditional expression or duplicate array keys.
 		"intelephense.diagnostics.suspectCode": true,
-
 		// When enabled, type checks will be performed as if a `declare(strict_types=1)` directive is present in all files.
 		"intelephense.diagnostics.strictTypes": false,
-
 		// Suppresses undefined property and method errors when `__get` or `__call` magic methods are declared.
 		"intelephense.diagnostics.suppressUndefinedMembersWhenMagicMethodDeclared": true,
-
-		// Sets the severity level for each diagnostic code.
-		"intelephense.diagnostics.severity": {},
-
 		// A map of globs to diagnostic codes to be excluded for the matching files. Use `*` as a value in the array to exclude all diagnostics. By default the vendor directory is excluded. You can override this by setting `**/vendor/**` to an empty array.
 		"intelephense.diagnostics.exclude": {
 			"**/vendor/**": [
 				"*"
 			]
 		},
-
 		// When set to `true`, anonymous usage and crash data will be sent to Azure Application Insights. Defaults to `false`.
 		"intelephense.telemetry.enabled": false,
-
 		// Glob patterns matching files and folders that should be excluded when renaming symbols. Rename operation will fail if the symbol definition is found in the excluded files/folders.
 		"intelephense.rename.exclude": [
 			"**/vendor/**"
 		],
-
 		// Controls the scope of a namespace rename operation.
 		"intelephense.rename.namespaceMode": "single",
-
 		// Glob patterns matching files and folders that should be excluded from references search.
 		"intelephense.references.exclude": [
 			"**/vendor/**"
 		],
-
 		// Adds `@return void` to auto generated phpdoc for definitions that do not return a value.
 		"intelephense.phpdoc.returnVoid": true,
-
 		// snippet - Auto generated phpdoc is returned in snippet format. Templates are partially resolved by evaluating phpdoc specific variables only.
 		// text - Auto generated phpdoc is returned as plain text. Templates are resolved completely by the server.
 		"intelephense.phpdoc.textFormat": "snippet",
-
 		// An object that describes the format of generated class/interface/trait phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE.
 		"intelephense.phpdoc.classTemplate": {
 			"summary": "\\$1",
@@ -288,7 +223,6 @@
 				"@package \\${1:\\$SYMBOL_NAMESPACE}"
 			]
 		},
-
 		// An object that describes the format of generated property phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE.
 		"intelephense.phpdoc.propertyTemplate": {
 			"summary": "\\$1",
@@ -296,7 +230,6 @@
 				"@var \\${1:\\$SYMBOL_TYPE}"
 			]
 		},
-
 		// An object that describes the format of generated function/method phpdoc. The following snippet variables are available: SYMBOL_NAME; SYMBOL_KIND; SYMBOL_TYPE; SYMBOL_NAMESPACE.
 		"intelephense.phpdoc.functionTemplate": {
 			"summary": "\\$1",
@@ -306,34 +239,24 @@
 				"@throws \\${1:\\$SYMBOL_TYPE} \\$2"
 			]
 		},
-
 		// Fully qualified names will be used for types when true. When false short type names will be used and imported where appropriate. Overrides intelephense.completion.insertUseDeclaration.
 		"intelephense.phpdoc.useFullyQualifiedNames": false,
-
 		// Enable a code lens that shows a reference count and command to peek locations.
 		"intelephense.codeLens.references.enable": false,
-
 		// Enable a code lens that shows an abstract and interface implementations count and command to peek locations.
 		"intelephense.codeLens.implementations.enable": false,
-
 		// Enable a code lens that shows a trait usages count and command to peek locations.
 		"intelephense.codeLens.usages.enable": false,
-
 		// Enable a code lens that shows method override count and command to peek locations.
 		"intelephense.codeLens.overrides.enable": false,
-
 		// Enable a code lens that indicates if a method has a parent implementation and command to peek location.
 		"intelephense.codeLens.parent.enable": false,
-
 		// Will show an inlay hint for call declaration return type if not already declared.
 		"intelephense.inlayHint.returnTypes": true,
-
 		// Will show inlay hints for anonymous function declaration parameter types if not already declared.
 		"intelephense.inlayHint.parameterTypes": true,
-
 		// Will show inlay hints for call argument parameter names if named arguments are not already in use.
 		"intelephense.inlayHint.parameterNames": true,
-
 		// The maximum call depth to follow when analyzing throw expressions. Defaults to `0`, which limits analysis to the current function. Higher values can have a negative impact on performance.
 		"intelephense.throwDepth": 0,
 	},

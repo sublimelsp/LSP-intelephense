@@ -477,18 +477,12 @@
                       "scope": "window"
                     },
                     "intelephense.environment.documentRoot": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
+                      "type": "string",
                       "markdownDescription": "The directory of the entry point to the application (directory of index.php). Can be absolute or relative to the workspace folder. Used for resolving script inclusion and path suggestions.",
                       "scope": "resource"
                     },
                     "intelephense.environment.includePaths": {
-                      "type": [
-                        "array",
-                        "null"
-                      ],
+                      "type": "array",
                       "items": {
                         "type": "string"
                       },
