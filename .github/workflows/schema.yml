@@ -9,18 +9,14 @@ on:
   workflow_dispatch:
 
 permissions:
+  contents: write
   pull-requests: write
   repository-projects: write
 
 jobs:
   check-settings:
-    uses: sublimelsp/workflows/.github/workflows/changed-settings.yaml@main
+    uses: sublimelsp/workflows/.github/workflows/changed-settings.yaml@v2
     with:
-      repository_url: 'https://github.com/bmewburn/vscode-intelephense'
-      configuration_file_path: 'package.json'
-      # JQ query to get all configuration settings converted to a flat list and with null values filtered out.
-      configuration_jq_query: '.contributes.configuration.properties'
-      schema_overrides_path: 'sublime-package.overrides.json'
       version_file: 'language-server/package.json'
       version_regexp: '"intelephense": "([^"]+)"'
       version_transform: 'v{}'

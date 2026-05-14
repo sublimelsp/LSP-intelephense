@@ -1,0 +1,18 @@
+{
+	"schemes": ["file", "buffer"],
+	"auto_complete_selector": "punctuation.accessor | punctuation.definition.variable | punctuation.separator.namespace | punctuation.definition.tag.begin",
+	"initialization_options": {
+		"clearCache": false,
+		// "storagePath": "${temp_dir}/intelephense",
+		// "globalStoragePath": "${home}/.intelephense",
+
+		// if you want to use a premium license, you can either paste the key directly
+		// or paste it into a file and provide its absolute path here
+		// "licenceKey": "${packages}/User/intelephense-license.txt",
+	},
+	"settings": {
+		{{ settings | indent('\t\t') }}
+	},
+	"selector": "embedding.php",
+	"priority_selector": "source.php",
+}
