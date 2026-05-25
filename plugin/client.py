@@ -3,13 +3,14 @@ from __future__ import annotations
 import json
 import os
 import tempfile
+from pathlib import Path
 from typing import Any, final
 
 import jmespath
 import sublime
-from LSP.plugin import ClientConfig, DottedDict, notification_handler
-from lsp_utils import NpmClientHandler
-from sublime_lib import ActivityIndicator
+from LSP.plugin import LspPlugin, OnPreStartContext, notification_handler
+from lsp_utils import NodeManager
+from sublime_lib import ActivityIndicator, ResourcePath
 from typing_extensions import override
 
 from .constants import PACKAGE_NAME
@@ -18,13 +19,27 @@ from .template import load_string_template
 
 
 @final
-class LspIntelephensePlugin(NpmClientHandler):
-    package_name = PACKAGE_NAME
-    server_directory = "language-server"
-    server_binary_path = os.path.join(server_directory, "node_modules", "intelephense", "lib", "intelephense.js")
-
+class LspIntelephensePlugin(LspPlugin):
     server_version = ""
     """The version of the language server."""
+
+    @classmethod
+    @override
+    def on_pre_start_async(cls, context: OnPreStartContext) -> None:
+        package_name = cls.plugin_storage_path.name
+        NodeManager.on_pre_start_async(
+            context,
+            cls.plugin_storage_path,
+            ResourcePath("Packages", package_name, "language-server"),
+            Path("node_modules", "intelephense", "lib", "intelephense.js"),
+            node_version_requirement=">=14",
+        )
+        context.variables.update({
+            "cache_path": sublime.cache_path(),
+            "home": os.path.expanduser("~"),
+            "package_storage": str(cls.plugin_storage_path),
+            "temp_dir": tempfile.gettempdir(),
+        })
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
@@ -32,47 +47,8 @@ class LspIntelephensePlugin(NpmClientHandler):
         self._activity_indicator: ActivityIndicator | None = None
 
     @override
-    @classmethod
-    def required_node_version(cls) -> str:
-        """
-        Testing playground at https://semver.npmjs.com
-        And `0.0.0` means "no restrictions".
-        """
-        return ">=14"
-
-    @override
-    @classmethod
-    def is_applicable(cls, view: sublime.View, config: ClientConfig) -> bool:
-        return bool(
-            super().is_applicable(view, config)
-            # REPL views (https://github.com/sublimelsp/LSP-pyright/issues/343)
-            and not view.settings().get("repl")
-        )
-
-    @override
-    @classmethod
-    def setup(cls) -> None:
-        super().setup()
-
-        cls.server_version = cls.parse_server_version()
-
-    @override
-    def on_settings_changed(self, settings: DottedDict) -> None:
-        super().on_settings_changed(settings)
-
+    def on_initialized_async(self) -> None:
         self.update_status_bar_text()
-
-    @override
-    @classmethod
-    def get_additional_variables(cls) -> dict[str, str]:
-        variables = super().get_additional_variables() or {}
-        variables.update({
-            "cache_path": sublime.cache_path(),
-            "home": os.path.expanduser("~"),
-            "package_storage": cls.package_storage(),
-            "temp_dir": tempfile.gettempdir(),
-        })
-        return variables
 
     # ---------------- #
     # message handlers #
@@ -80,7 +56,7 @@ class LspIntelephensePlugin(NpmClientHandler):
 
     @notification_handler("indexingStarted")
     def handle_indexing_started(self, params: None) -> None:
-        self._start_indicator(f"{self.package_name}: Indexing...")
+        self._start_indicator(f"{PACKAGE_NAME}: Indexing...")
 
     @notification_handler("indexingEnded")
     def handle_indexing_ended(self, params: None) -> None:
@@ -108,6 +84,10 @@ class LspIntelephensePlugin(NpmClientHandler):
             except Exception as e:
                 log_warning(f'Invalid "statusText" template: {e}')
         session.set_config_status_async(rendered_text)
+
+    @classmethod
+    def setup(cls) -> None:
+        cls.server_version = cls.parse_server_version()
 
     @classmethod
     def parse_server_version(cls) -> str:
