@@ -29,8 +29,10 @@ ci-base-cmd = uv run --dev
 
 .PHONY: ci-check
 ci-check:
-# 	@echo "========== check: mypy =========="
-# 	$(ci-base-cmd) mypy -p plugin
+	@if [ -n "$$CI" ]; then \
+		echo "========== check: mypy =========="; \
+		$(ci-base-cmd) mypy -p plugin; \
+	fi
 	@echo "========== check: ruff (lint) =========="
 	$(ci-base-cmd) ruff check --diff .
 	@echo "========== check: ruff (format) =========="
