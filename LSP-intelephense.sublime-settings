@@ -1,5 +1,4 @@
 {
-	"schemes": ["file", "buffer"],
 	"auto_complete_selector": "punctuation.accessor | punctuation.definition.variable | punctuation.separator.namespace | punctuation.definition.tag.begin",
 	"initialization_options": {
 		"clearCache": false,
@@ -260,6 +259,13 @@
 		// The maximum call depth to follow when analyzing throw expressions. Defaults to `0`, which limits analysis to the current function. Higher values can have a negative impact on performance.
 		"intelephense.throwDepth": 0,
 	},
+	// The path to the server binary used to start the language server.
+	// Use `auto` for the package to manage (install/update) the server automatically.
+	// NOTE: Change this instead of directly updating `command` - the `${server_path}` variable is dynamically resolved based on this setting.
+	// WARNING: Override at your own risk - using a custom binary can cause compatibility issues with server settings.
+	"server_path": "auto",
+	"command": ["${node_bin}", "${server_path}", "--stdio"],
+	"schemes": ["file", "buffer"],
 	"selector": "embedding.php",
 	"priority_selector": "source.php",
 }
