@@ -9,14 +9,15 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pull-requests: write
-  repository-projects: write
 
 jobs:
   check-settings:
-    uses: sublimelsp/workflows/.github/workflows/changed-settings.yaml@v2
+    uses: sublimelsp/workflows/.github/workflows/changed-settings.yaml@v3
     with:
       version_file: 'language-server/package.json'
       version_regexp: '"intelephense": "([^"]+)"'
       version_transform: 'v{}'
+    secrets:
+      SUBLIMELSP_APP_PRIVATE_KEY: ${{ secrets.SUBLIMELSP_APP_PRIVATE_KEY }}
