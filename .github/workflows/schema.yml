@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   check-settings:
-    uses: sublimelsp/workflows/.github/workflows/changed-settings.yaml@v2
+    uses: sublimelsp/workflows/.github/workflows/changed-settings.yaml@v3
     with:
       version_file: 'language-server/package.json'
       version_regexp: '"intelephense": "([^"]+)"'
